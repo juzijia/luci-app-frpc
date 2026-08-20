@@ -9,6 +9,10 @@
 
 本项目是 LuCI 管理界面及 OpenWrt / ImmortalWrt 集成项目，不是 FRP Core 的 fork 或重新分发项目。本项目不包含、不分发 FRP Core；FRP Core 请从 [FRP 官方仓库（fatedier/frp）](https://github.com/fatedier/frp) 获取。
 
+## 界面预览
+
+![FRPC LuCI 管理界面](docs/screenshots/frpc.png)
+
 ## 安装
 
 本项目提供 LuCI 管理界面，不包含、不分发 FRPC Core 二进制。

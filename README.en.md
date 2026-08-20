@@ -9,6 +9,10 @@ A LuCI management interface for FRPC on OpenWrt / ImmortalWrt.
 
 This is a LuCI management interface and OpenWrt / ImmortalWrt integration project, not a fork or redistribution of FRP Core. This project does not include or distribute FRP Core; obtain FRP Core from the [official FRP repository (fatedier/frp)](https://github.com/fatedier/frp).
 
+## Interface Preview
+
+![FRPC LuCI management interface](docs/screenshots/frpc.png)
+
 ## Installation
 
 This project provides the LuCI management interface and does not include or distribute the FRPC Core binary.
