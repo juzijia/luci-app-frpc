@@ -1,0 +1,5 @@
+config frpc 'main'
+	option enabled '0'
+	option client_file '/usr/bin/frpc'
+	option respawn '1'
+	option schema_version '2'

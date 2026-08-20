@@ -1,0 +1,44 @@
+{
+	"admin/services/frpc-advanced": {
+		"title": "Frp Client",
+		"action": {
+			"type": "firstchild"
+		},
+		"depends": {
+			"acl": [ "luci-app-frpc-advanced" ]
+		}
+	},
+	"admin/services/frpc-advanced/settings": {
+		"title": "Settings",
+		"order": 1,
+		"action": {
+			"type": "view",
+			"path": "frpc-advanced"
+		},
+		"depends": {
+			"acl": [ "luci-app-frpc-advanced" ]
+		}
+	},
+	"admin/services/frpc-advanced/config": {
+		"title": "TOML Comparison",
+		"order": 2,
+		"action": {
+			"type": "view",
+			"path": "frpc-advanced-config"
+		},
+		"depends": {
+			"acl": [ "luci-app-frpc-advanced" ]
+		}
+	},
+	"admin/services/frpc-advanced/log": {
+		"title": "Running Log",
+		"order": 3,
+		"action": {
+			"type": "view",
+			"path": "frpc-advanced-log"
+		},
+		"depends": {
+			"acl": [ "luci-app-frpc-advanced" ]
+		}
+	}
+}

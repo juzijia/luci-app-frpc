@@ -1,0 +1,935 @@
+#!/bin/sh /etc/rc.common
+#
+# Copyright 2019 Xingwang Liao <kuoruan@gmail.com>
+# Copyright 2026 luci-app-frpc-advanced contributors
+# Licensed to the public under the MIT License.
+#
+
+START=99
+USE_PROCD=1
+
+NAME="frpc-advanced"
+CONFIG_FOLDER="/var/etc/$NAME"
+
+EXTRA_COMMANDS="preview_config"
+EXTRA_HELP="\n\tpreview_config\tGenerate TOML from saved UCI without changing service state"
+
+_log() {
+	local level="$1"
+	shift
+	logger -p "daemon.$level" -t "$NAME" "$*"
+	printf '[%s] %s\n' "$level" "$*" >&2
+}
+
+_info() {
+	logger -p daemon.info -t "$NAME" "$*"
+}
+
+_err() {
+	_log err "$@"
+}
+
+toml_escape() {
+	printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\t/\\t/g'
+}
+
+toml_write_string() {
+	local file="$1" key="$2" value="$3"
+	[ -n "$value" ] || return 0
+	printf '%s = "%s"\n' "$key" "$(toml_escape "$value")" >> "$file" || { TOML_WRITE_ERROR=1; return 1; }
+}
+
+toml_write_scalar() {
+	local file="$1" key="$2" value="$3"
+	[ -n "$value" ] || return 0
+	printf '%s = %s\n' "$key" "$value" >> "$file" || { TOML_WRITE_ERROR=1; return 1; }
+}
+
+_toml_array_add() {
+	local value="$1" escaped
+	[ -n "$value" ] || return 0
+	escaped="$(toml_escape "$value")"
+	[ -n "$TOML_ARRAY_ITEMS" ] && TOML_ARRAY_ITEMS="$TOML_ARRAY_ITEMS, "
+	TOML_ARRAY_ITEMS="${TOML_ARRAY_ITEMS}\"${escaped}\""
+	TOML_ARRAY_COUNT=$((TOML_ARRAY_COUNT + 1))
+	return 0
+}
+
+_toml_array_add_legacy() {
+	local raw="$1" item old_ifs
+	old_ifs="$IFS"
+	IFS=','
+	for item in $raw; do
+		item="$(printf '%s' "$item" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+		_toml_array_add "$item"
+	done
+	IFS="$old_ifs"
+	return 0
+}
+
+toml_write_array_from_uci() {
+	local file="$1" key="$2" section="$3" option="$4" raw
+
+	TOML_ARRAY_ITEMS=""
+	TOML_ARRAY_COUNT=0
+	config_list_foreach "$section" "$option" _toml_array_add
+
+	if [ "$TOML_ARRAY_COUNT" -eq 0 ]; then
+		config_get raw "$section" "$option"
+		[ -n "$raw" ] || return 0
+		_toml_array_add_legacy "$raw"
+	fi
+
+	[ "$TOML_ARRAY_COUNT" -gt 0 ] || return 0
+	printf '%s = [%s]\n' "$key" "$TOML_ARRAY_ITEMS" >> "$file" || { TOML_WRITE_ERROR=1; return 1; }
+}
+
+_append_raw_line() {
+	local line="$1" file="$2"
+	[ -n "$line" ] || return 0
+	printf '%s\n' "$line" >> "$file" || { TOML_WRITE_ERROR=1; return 1; }
+}
+
+_append_raw_counted() {
+	RAW_OPTION_COUNT=$((RAW_OPTION_COUNT + 1))
+	_append_raw_line "$1" "$RAW_OPTION_FILE"
+}
+
+append_raw_options() {
+	local file="$1" section="$2" option="$3" raw
+	RAW_OPTION_COUNT=0
+	RAW_OPTION_FILE="$file"
+	config_list_foreach "$section" "$option" _append_raw_counted
+	if [ "$RAW_OPTION_COUNT" -eq 0 ]; then
+		config_get raw "$section" "$option"
+		[ -n "$raw" ] && _append_raw_line "$raw" "$file"
+	fi
+	return 0
+}
+
+main_section_validate() {
+	uci_validate_section "$NAME" frpc "$1" \
+		'enabled:bool:0' \
+		'client_file:string:/usr/bin/frpc' \
+		'server:string' \
+		'run_user:string' \
+		'respawn:bool:1' \
+		'clientID:string' \
+		'user:string' \
+		'log__level:or("trace", "debug", "info", "warn", "error")' \
+		'loginFailExit:or("true", "false")' \
+		'transport__protocol:or("tcp", "kcp", "quic", "websocket", "wss")' \
+		'transport__wireProtocol:or("v1", "v2")' \
+		'transport__poolCount:uinteger' \
+		'transport__dialServerTimeout:uinteger' \
+		'transport__dialServerKeepalive:integer' \
+		'transport__dialServerKeepAlive:integer' \
+		'transport__connectServerLocalIP:host' \
+		'transport__quic__keepalivePeriod:integer' \
+		'transport__quic__maxIdleTimeout:integer' \
+		'transport__quic__maxIncomingStreams:uinteger' \
+		'transport__proxyURL:string' \
+		'transport__tls__enable:or("true", "false")' \
+		'transport__tls__disableCustomTLSFirstByte:or("true", "false")' \
+		'transport__tls__certFile:file' \
+		'transport__tls__keyFile:file' \
+		'transport__tls__trustedCaFile:file' \
+		'transport__tls__serverName:string' \
+		'transport__heartbeatInterval:integer' \
+		'transport__heartbeatTimeout:integer' \
+		'dnsServer:host' \
+		'natHoleStunServer:string' \
+		'udpPacketSize:uinteger' \
+		'includes:list(string)' \
+		'store__path:string' \
+		'webServer__addr:host' \
+		'webServer__port:port' \
+		'webServer__user:string' \
+		'webServer__password:string' \
+		'webServer__assetsDir:string' \
+		'webServer__tls__certFile:file' \
+		'webServer__tls__keyFile:file' \
+		'webServer__pprofEnable:or("true", "false")' \
+		'com_extra_options:list(string)' \
+		'schema_version:uinteger'
+}
+
+server_section_validate() {
+	uci_validate_section "$NAME" server "$1" \
+		'alias:string' \
+		'serverAddr:string' \
+		'serverPort:port' \
+		'auth__method:or("token", "oidc")' \
+		'auth__token:string' \
+		'auth__tokenSource__type:or("file")' \
+		'auth__tokenSource__file__path:file' \
+		'auth__additionalScopes:list(string)' \
+		'auth__oidc__clientID:string' \
+		'auth__oidc__clientSecret:string' \
+		'auth__oidc__audience:string' \
+		'auth__oidc__scope:string' \
+		'auth__oidc__tokenEndpointURL:string' \
+		'auth__oidc__trustedCaFile:file' \
+		'auth__oidc__insecureSkipVerify:or("true", "false")' \
+		'auth__oidc__proxyURL:string' \
+		'transport__tls__enable:or("true", "false")' \
+		'transport__tls__disableCustomTLSFirstByte:or("true", "false")' \
+		'transport__tls__certFile:file' \
+		'transport__tls__keyFile:file' \
+		'transport__tls__trustedCaFile:file' \
+		'transport__tls__serverName:string' \
+		'transport__tcpMux:or("true", "false")' \
+		'transport__tcpMuxKeepaliveInterval:uinteger'
+}
+
+rule_section_validate() {
+	uci_validate_section "$NAME" rule "$1" \
+		'enabled:bool:1' \
+		'name:string' \
+		'type:or("tcp", "udp", "http", "https", "tcpmux", "stcp", "xtcp", "sudp")' \
+		'visitor:bool:0' \
+		'localIP:host' \
+		'localPort:port' \
+		'remotePort:uinteger' \
+		'secretKey:string' \
+		'allowUsers:list(string)' \
+		'multiplexer:or("httpconnect")' \
+		'serverName:string' \
+		'serverUser:string' \
+		'bindAddr:host' \
+		'bindPort:integer' \
+		'protocol:or("kcp", "quic")' \
+		'keepTunnelOpen:or("true", "false")' \
+		'maxRetriesAnHour:integer' \
+		'minRetryInterval:integer' \
+		'fallbackTo:string' \
+		'fallbackTimeoutMs:uinteger' \
+		'natTraversal__disableAssistedAddrs:or("true", "false")' \
+		'customDomains:list(string)' \
+		'subdomain:string' \
+		'locations:list(string)' \
+		'httpUser:string' \
+		'httpPassword:string' \
+		'routeByHTTPUser:string' \
+		'hostHeaderRewrite:string' \
+		'transport__bandwidthLimit:string' \
+		'transport__bandwidthLimitMode:or("client", "server")' \
+		'transport__useEncryption:or("true", "false")' \
+		'transport__useCompression:or("true", "false")' \
+		'transport__proxyProtocolVersion:or("v1", "v2")' \
+		'loadBalancer__group:string' \
+		'loadBalancer__groupKey:string' \
+		'healthCheck__type:or("tcp", "http")' \
+		'healthCheck__path:string' \
+		'healthCheck__timeoutSeconds:uinteger' \
+		'healthCheck__maxFailed:uinteger' \
+		'healthCheck__intervalSeconds:uinteger' \
+		'PlUgIn_type:or("unix_domain_socket", "http_proxy", "socks5", "static_file", "https2http", "https2https", "http2https", "http2http", "tls2raw")' \
+		'unixPath:string' \
+		'username:string' \
+		'password:string' \
+		'localPath:string' \
+		'stripPrefix:string' \
+		'PlUgIn_httpUser:string' \
+		'PlUgIn_httpPassword:string' \
+		'localAddr:string' \
+		'crtPath:file' \
+		'keyPath:file' \
+		'PlUgIn_hostHeaderRewrite:string' \
+		'enableHTTP2:or("true", "false")' \
+		'extra_options:list(string)' \
+		'extra_options_plugin:list(string)'
+}
+
+load_main_context() {
+	local section="$1" legacy_keepalive
+
+	main_section_validate "$section" || {
+		_err "Main section validation failed: $section"
+		return 1
+	}
+
+	config_get_bool MAIN_ENABLED "$section" enabled 0
+	config_get MAIN_CLIENT_FILE "$section" client_file /usr/bin/frpc
+	config_get MAIN_SERVER "$section" server
+	config_get MAIN_RUN_USER "$section" run_user
+	config_get_bool MAIN_RESPAWN "$section" respawn 1
+	config_get MAIN_CLIENT_ID "$section" clientID
+	config_get MAIN_USER "$section" user
+	config_get MAIN_LOG_LEVEL "$section" log__level info
+	config_get MAIN_LOGIN_FAIL_EXIT "$section" loginFailExit
+	config_get MAIN_PROTOCOL "$section" transport__protocol
+	config_get MAIN_WIRE_PROTOCOL "$section" transport__wireProtocol
+	config_get MAIN_POOL_COUNT "$section" transport__poolCount
+	config_get MAIN_DIAL_TIMEOUT "$section" transport__dialServerTimeout
+	config_get MAIN_DIAL_KEEPALIVE "$section" transport__dialServerKeepalive
+	if [ -z "$MAIN_DIAL_KEEPALIVE" ]; then
+		config_get legacy_keepalive "$section" transport__dialServerKeepAlive
+		MAIN_DIAL_KEEPALIVE="$legacy_keepalive"
+	fi
+	config_get MAIN_CONNECT_LOCAL_IP "$section" transport__connectServerLocalIP
+	config_get MAIN_QUIC_KEEPALIVE "$section" transport__quic__keepalivePeriod
+	config_get MAIN_QUIC_IDLE "$section" transport__quic__maxIdleTimeout
+	config_get MAIN_QUIC_STREAMS "$section" transport__quic__maxIncomingStreams
+	config_get MAIN_PROXY_URL "$section" transport__proxyURL
+	config_get MAIN_TLS_ENABLE "$section" transport__tls__enable
+	config_get MAIN_TLS_DISABLE_FIRST_BYTE "$section" transport__tls__disableCustomTLSFirstByte
+	config_get MAIN_TLS_CERT "$section" transport__tls__certFile
+	config_get MAIN_TLS_KEY "$section" transport__tls__keyFile
+	config_get MAIN_TLS_CA "$section" transport__tls__trustedCaFile
+	config_get MAIN_TLS_SERVER_NAME "$section" transport__tls__serverName
+	config_get MAIN_HEARTBEAT_INTERVAL "$section" transport__heartbeatInterval
+	config_get MAIN_HEARTBEAT_TIMEOUT "$section" transport__heartbeatTimeout
+	config_get MAIN_DNS "$section" dnsServer
+	config_get MAIN_STUN "$section" natHoleStunServer
+	config_get MAIN_UDP_PACKET "$section" udpPacketSize
+	config_get MAIN_INCLUDES "$section" includes
+	config_get MAIN_STORE_PATH "$section" store__path
+	config_get MAIN_WEB_ADDR "$section" webServer__addr
+	config_get MAIN_WEB_PORT "$section" webServer__port
+	config_get MAIN_WEB_USER "$section" webServer__user
+	config_get MAIN_WEB_PASSWORD "$section" webServer__password
+	config_get MAIN_WEB_ASSETS "$section" webServer__assetsDir
+	config_get MAIN_WEB_CERT "$section" webServer__tls__certFile
+	config_get MAIN_WEB_KEY "$section" webServer__tls__keyFile
+	config_get MAIN_WEB_PPROF "$section" webServer__pprofEnable
+
+	[ -n "$MAIN_SERVER" ] && [ "$MAIN_SERVER" != "nil" ] || {
+		_err "No server selected for instance: $section"
+		return 1
+	}
+
+	server_section_validate "$MAIN_SERVER" || {
+		_err "Server section validation failed: $MAIN_SERVER"
+		return 1
+	}
+
+	config_get SERVER_ADDR "$MAIN_SERVER" serverAddr
+	config_get SERVER_PORT "$MAIN_SERVER" serverPort
+	config_get SERVER_AUTH_METHOD "$MAIN_SERVER" auth__method token
+	config_get SERVER_AUTH_TOKEN "$MAIN_SERVER" auth__token
+	config_get SERVER_TOKEN_SOURCE_TYPE "$MAIN_SERVER" auth__tokenSource__type
+	config_get SERVER_TOKEN_SOURCE_PATH "$MAIN_SERVER" auth__tokenSource__file__path
+	if [ -n "$SERVER_TOKEN_SOURCE_PATH" ]; then
+		SERVER_TOKEN_SOURCE_TYPE=file
+	else
+		SERVER_TOKEN_SOURCE_TYPE=
+	fi
+	config_get SERVER_OIDC_CLIENT_ID "$MAIN_SERVER" auth__oidc__clientID
+	config_get SERVER_OIDC_CLIENT_SECRET "$MAIN_SERVER" auth__oidc__clientSecret
+	config_get SERVER_OIDC_AUDIENCE "$MAIN_SERVER" auth__oidc__audience
+	config_get SERVER_OIDC_SCOPE "$MAIN_SERVER" auth__oidc__scope
+	config_get SERVER_OIDC_ENDPOINT "$MAIN_SERVER" auth__oidc__tokenEndpointURL
+	config_get SERVER_OIDC_CA "$MAIN_SERVER" auth__oidc__trustedCaFile
+	config_get SERVER_OIDC_INSECURE "$MAIN_SERVER" auth__oidc__insecureSkipVerify
+	config_get SERVER_OIDC_PROXY "$MAIN_SERVER" auth__oidc__proxyURL
+	config_get SERVER_TLS_ENABLE "$MAIN_SERVER" transport__tls__enable
+	config_get SERVER_TLS_DISABLE_FIRST_BYTE "$MAIN_SERVER" transport__tls__disableCustomTLSFirstByte
+	config_get SERVER_TLS_CERT "$MAIN_SERVER" transport__tls__certFile
+	config_get SERVER_TLS_KEY "$MAIN_SERVER" transport__tls__keyFile
+	config_get SERVER_TLS_CA "$MAIN_SERVER" transport__tls__trustedCaFile
+	config_get SERVER_TLS_SERVER_NAME "$MAIN_SERVER" transport__tls__serverName
+	config_get SERVER_TCP_MUX "$MAIN_SERVER" transport__tcpMux
+	config_get SERVER_TCP_MUX_KEEPALIVE "$MAIN_SERVER" transport__tcpMuxKeepaliveInterval
+
+	[ -n "$SERVER_TLS_ENABLE" ] && MAIN_TLS_ENABLE="$SERVER_TLS_ENABLE"
+	[ -n "$SERVER_TLS_DISABLE_FIRST_BYTE" ] && MAIN_TLS_DISABLE_FIRST_BYTE="$SERVER_TLS_DISABLE_FIRST_BYTE"
+	[ -n "$SERVER_TLS_CERT" ] && MAIN_TLS_CERT="$SERVER_TLS_CERT"
+	[ -n "$SERVER_TLS_KEY" ] && MAIN_TLS_KEY="$SERVER_TLS_KEY"
+	[ -n "$SERVER_TLS_CA" ] && MAIN_TLS_CA="$SERVER_TLS_CA"
+	[ -n "$SERVER_TLS_SERVER_NAME" ] && MAIN_TLS_SERVER_NAME="$SERVER_TLS_SERVER_NAME"
+
+	if [ "$SERVER_AUTH_METHOD" = oidc ]; then
+		[ -n "$SERVER_OIDC_CLIENT_ID" ] || { _err "OIDC client ID is required for server: $MAIN_SERVER"; return 1; }
+		[ -n "$SERVER_OIDC_ENDPOINT" ] || { _err "OIDC token endpoint URL is required for server: $MAIN_SERVER"; return 1; }
+	fi
+
+	return 0
+}
+
+_rule_name_seen() {
+	local name="$1"
+	[ -n "$RULE_NAMES" ] || return 1
+	printf '%s\n' "$RULE_NAMES" | grep -Fqx "$name"
+}
+
+_rule_name_add() {
+	local name="$1"
+	if [ -n "$RULE_NAMES" ]; then
+		RULE_NAMES="$RULE_NAMES
+$name"
+	else
+		RULE_NAMES="$name"
+	fi
+}
+
+_uci_value_seen() {
+	[ -n "$1" ] && UCI_VALUE_COUNT=$((UCI_VALUE_COUNT + 1))
+	return 0
+}
+
+uci_option_has_values() {
+	local section="$1" option="$2" raw
+	UCI_VALUE_COUNT=0
+	config_list_foreach "$section" "$option" _uci_value_seen
+	[ "$UCI_VALUE_COUNT" -gt 0 ] && return 0
+	config_get raw "$section" "$option"
+	[ -n "$raw" ]
+}
+
+plugin_type_compatible() {
+	local proxy_type="$1" plugin_type="$2"
+	case "$plugin_type" in
+		"") return 0 ;;
+		unix_domain_socket|http_proxy|socks5|static_file|http2http|tls2raw)
+			[ "$proxy_type" = tcp ] ;;
+		https2http|https2https)
+			[ "$proxy_type" = https ] ;;
+		http2https)
+			[ "$proxy_type" = http ] ;;
+		*) return 1 ;;
+	esac
+}
+
+load_rule_context() {
+	local section="$1"
+
+	rule_section_validate "$section" || {
+		_err "Rule section validation failed: $section"
+		return 1
+	}
+
+	config_get_bool RULE_ENABLED "$section" enabled 1
+	config_get RULE_NAME "$section" name
+	config_get RULE_TYPE "$section" type
+	config_get_bool RULE_VISITOR "$section" visitor 0
+	config_get RULE_LOCAL_IP "$section" localIP
+	config_get RULE_LOCAL_PORT "$section" localPort
+	config_get RULE_REMOTE_PORT "$section" remotePort
+	config_get RULE_SECRET_KEY "$section" secretKey
+	config_get RULE_MULTIPLEXER "$section" multiplexer httpconnect
+	config_get RULE_SERVER_NAME "$section" serverName
+	config_get RULE_SERVER_USER "$section" serverUser
+	config_get RULE_BIND_ADDR "$section" bindAddr
+	config_get RULE_BIND_PORT "$section" bindPort
+	config_get RULE_PROTOCOL "$section" protocol
+	config_get RULE_KEEP_TUNNEL_OPEN "$section" keepTunnelOpen
+	config_get RULE_MAX_RETRIES "$section" maxRetriesAnHour
+	config_get RULE_MIN_RETRY_INTERVAL "$section" minRetryInterval
+	config_get RULE_FALLBACK_TO "$section" fallbackTo
+	config_get RULE_FALLBACK_TIMEOUT "$section" fallbackTimeoutMs
+	config_get RULE_NAT_DISABLE_ASSISTED "$section" natTraversal__disableAssistedAddrs
+	config_get RULE_SUBDOMAIN "$section" subdomain
+	config_get RULE_HTTP_USER "$section" httpUser
+	config_get RULE_HTTP_PASSWORD "$section" httpPassword
+	config_get RULE_ROUTE_BY_HTTP_USER "$section" routeByHTTPUser
+	config_get RULE_HOST_HEADER_REWRITE "$section" hostHeaderRewrite
+	config_get RULE_BANDWIDTH_LIMIT "$section" transport__bandwidthLimit
+	config_get RULE_BANDWIDTH_MODE "$section" transport__bandwidthLimitMode
+	config_get RULE_USE_ENCRYPTION "$section" transport__useEncryption
+	config_get RULE_USE_COMPRESSION "$section" transport__useCompression
+	config_get RULE_PROXY_PROTOCOL "$section" transport__proxyProtocolVersion
+	config_get RULE_LB_GROUP "$section" loadBalancer__group
+	config_get RULE_LB_GROUP_KEY "$section" loadBalancer__groupKey
+	config_get RULE_HEALTH_TYPE "$section" healthCheck__type
+	config_get RULE_HEALTH_PATH "$section" healthCheck__path
+	config_get RULE_HEALTH_TIMEOUT "$section" healthCheck__timeoutSeconds
+	config_get RULE_HEALTH_MAX_FAILED "$section" healthCheck__maxFailed
+	config_get RULE_HEALTH_INTERVAL "$section" healthCheck__intervalSeconds
+	config_get RULE_PLUGIN_TYPE "$section" PlUgIn_type
+	config_get RULE_PLUGIN_UNIX_PATH "$section" unixPath
+	config_get RULE_PLUGIN_USERNAME "$section" username
+	config_get RULE_PLUGIN_PASSWORD "$section" password
+	config_get RULE_PLUGIN_LOCAL_PATH "$section" localPath
+	config_get RULE_PLUGIN_STRIP_PREFIX "$section" stripPrefix
+	config_get RULE_PLUGIN_HTTP_USER "$section" PlUgIn_httpUser
+	config_get RULE_PLUGIN_HTTP_PASSWORD "$section" PlUgIn_httpPassword
+	config_get RULE_PLUGIN_LOCAL_ADDR "$section" localAddr
+	config_get RULE_PLUGIN_CERT "$section" crtPath
+	config_get RULE_PLUGIN_KEY "$section" keyPath
+	config_get RULE_PLUGIN_HOST_REWRITE "$section" PlUgIn_hostHeaderRewrite
+	config_get RULE_PLUGIN_ENABLE_HTTP2 "$section" enableHTTP2
+
+	return 0
+}
+
+render_rule() {
+	local section="$1" file="$2"
+
+	load_rule_context "$section" || {
+		RENDER_ERROR=1
+		return 1
+	}
+
+	[ "$RULE_ENABLED" = 1 ] || return 0
+	[ -n "$RULE_NAME" ] || {
+		_err "Rule name is required: $section"
+		RENDER_ERROR=1
+		return 1
+	}
+	[ -n "$RULE_TYPE" ] || {
+		_err "Rule type is required: $section"
+		RENDER_ERROR=1
+		return 1
+	}
+
+	if _rule_name_seen "$RULE_NAME"; then
+		_err "Duplicate rule name: $RULE_NAME"
+		RENDER_ERROR=1
+		return 1
+	fi
+	_rule_name_add "$RULE_NAME"
+
+	if [ "$RULE_VISITOR" = 1 ]; then
+		case "$RULE_TYPE" in stcp|xtcp|sudp) ;; *)
+			_err "Visitor rule $RULE_NAME has unsupported type: $RULE_TYPE"
+			RENDER_ERROR=1
+			return 1
+		esac
+		[ -z "$RULE_PLUGIN_TYPE" ] || {
+			_err "Visitor rule $RULE_NAME cannot use a proxy plugin"
+			RENDER_ERROR=1
+			return 1
+		}
+		[ -n "$RULE_SECRET_KEY" ] || { _err "Visitor secretKey is required: $RULE_NAME"; RENDER_ERROR=1; return 1; }
+		[ -n "$RULE_SERVER_NAME" ] || { _err "Visitor serverName is required: $RULE_NAME"; RENDER_ERROR=1; return 1; }
+		[ -n "$RULE_BIND_PORT" ] && [ "$RULE_BIND_PORT" != 0 ] || { _err "Visitor bindPort is required: $RULE_NAME"; RENDER_ERROR=1; return 1; }
+
+		printf '\n[[visitors]]\n' >> "$file" || { TOML_WRITE_ERROR=1; RENDER_ERROR=1; return 1; }
+		toml_write_string "$file" name "$RULE_NAME"
+		toml_write_string "$file" type "$RULE_TYPE"
+		toml_write_scalar "$file" transport.useEncryption "$RULE_USE_ENCRYPTION"
+		toml_write_scalar "$file" transport.useCompression "$RULE_USE_COMPRESSION"
+		toml_write_string "$file" secretKey "$RULE_SECRET_KEY"
+		toml_write_string "$file" serverUser "$RULE_SERVER_USER"
+		toml_write_string "$file" serverName "$RULE_SERVER_NAME"
+		toml_write_string "$file" bindAddr "$RULE_BIND_ADDR"
+		toml_write_scalar "$file" bindPort "$RULE_BIND_PORT"
+		if [ "$RULE_TYPE" = xtcp ]; then
+			toml_write_string "$file" protocol "$RULE_PROTOCOL"
+			toml_write_scalar "$file" keepTunnelOpen "$RULE_KEEP_TUNNEL_OPEN"
+			toml_write_scalar "$file" maxRetriesAnHour "$RULE_MAX_RETRIES"
+			toml_write_scalar "$file" minRetryInterval "$RULE_MIN_RETRY_INTERVAL"
+			toml_write_string "$file" fallbackTo "$RULE_FALLBACK_TO"
+			toml_write_scalar "$file" fallbackTimeoutMs "$RULE_FALLBACK_TIMEOUT"
+			toml_write_scalar "$file" natTraversal.disableAssistedAddrs "$RULE_NAT_DISABLE_ASSISTED"
+		fi
+		append_raw_options "$file" "$section" extra_options
+		return 0
+	fi
+
+	case "$RULE_TYPE" in tcp|udp|http|https|tcpmux|stcp|xtcp|sudp) ;; *)
+		_err "Proxy rule $RULE_NAME has unsupported type: $RULE_TYPE"
+		RENDER_ERROR=1
+		return 1
+	esac
+
+	plugin_type_compatible "$RULE_TYPE" "$RULE_PLUGIN_TYPE" || {
+		_err "Plugin $RULE_PLUGIN_TYPE is incompatible with proxy type $RULE_TYPE in rule $RULE_NAME"
+		RENDER_ERROR=1
+		return 1
+	}
+
+	if [ -z "$RULE_PLUGIN_TYPE" ] && [ -z "$RULE_LOCAL_PORT" ]; then
+		_err "localPort is required when no plugin is selected: $RULE_NAME"
+		RENDER_ERROR=1
+		return 1
+	fi
+	case "$RULE_TYPE" in
+		stcp|xtcp|sudp)
+			[ -n "$RULE_SECRET_KEY" ] || {
+				_err "secretKey is required for private proxy: $RULE_NAME"
+				RENDER_ERROR=1
+				return 1
+			}
+			;;
+		http|https|tcpmux)
+			if [ -z "$RULE_SUBDOMAIN" ] && ! uci_option_has_values "$section" customDomains; then
+				_err "subdomain or customDomains is required: $RULE_NAME"
+				RENDER_ERROR=1
+				return 1
+			fi
+			;;
+	esac
+	if [ "$RULE_TYPE" = tcpmux ] && [ "$RULE_MULTIPLEXER" != httpconnect ]; then
+		_err "tcpmux multiplexer must be httpconnect: $RULE_NAME"
+		RENDER_ERROR=1
+		return 1
+	fi
+	if [ "$RULE_HEALTH_TYPE" = http ] && [ -z "$RULE_HEALTH_PATH" ]; then
+		_err "HTTP health check path is required: $RULE_NAME"
+		RENDER_ERROR=1
+		return 1
+	fi
+	case "$RULE_PLUGIN_TYPE" in
+		unix_domain_socket) [ -n "$RULE_PLUGIN_UNIX_PATH" ] || { _err "Plugin unixPath is required: $RULE_NAME"; RENDER_ERROR=1; return 1; } ;;
+		static_file) [ -n "$RULE_PLUGIN_LOCAL_PATH" ] || { _err "Plugin localPath is required: $RULE_NAME"; RENDER_ERROR=1; return 1; } ;;
+		https2http|https2https|http2https|tls2raw) [ -n "$RULE_PLUGIN_LOCAL_ADDR" ] || { _err "Plugin localAddr is required: $RULE_NAME"; RENDER_ERROR=1; return 1; } ;;
+	esac
+
+	printf '\n[[proxies]]\n' >> "$file" || { TOML_WRITE_ERROR=1; RENDER_ERROR=1; return 1; }
+	toml_write_string "$file" name "$RULE_NAME"
+	toml_write_string "$file" type "$RULE_TYPE"
+
+	if [ -z "$RULE_PLUGIN_TYPE" ]; then
+		toml_write_string "$file" localIP "$RULE_LOCAL_IP"
+		toml_write_scalar "$file" localPort "$RULE_LOCAL_PORT"
+	fi
+
+	case "$RULE_TYPE" in
+		tcp|udp) toml_write_scalar "$file" remotePort "$RULE_REMOTE_PORT" ;;
+	esac
+
+	case "$RULE_TYPE" in
+		stcp|xtcp|sudp)
+			toml_write_string "$file" secretKey "$RULE_SECRET_KEY"
+			toml_write_array_from_uci "$file" allowUsers "$section" allowUsers
+			;;
+	esac
+
+	if [ "$RULE_TYPE" = xtcp ]; then
+		toml_write_scalar "$file" natTraversal.disableAssistedAddrs "$RULE_NAT_DISABLE_ASSISTED"
+	fi
+
+	[ "$RULE_TYPE" = tcpmux ] && toml_write_string "$file" multiplexer "$RULE_MULTIPLEXER"
+
+	case "$RULE_TYPE" in
+		http|https|tcpmux)
+			toml_write_array_from_uci "$file" customDomains "$section" customDomains
+			toml_write_string "$file" subdomain "$RULE_SUBDOMAIN"
+			;;
+	esac
+
+	if [ "$RULE_TYPE" = http ]; then
+		toml_write_array_from_uci "$file" locations "$section" locations
+		toml_write_string "$file" hostHeaderRewrite "$RULE_HOST_HEADER_REWRITE"
+	fi
+
+	case "$RULE_TYPE" in
+		http|tcpmux)
+			toml_write_string "$file" httpUser "$RULE_HTTP_USER"
+			toml_write_string "$file" httpPassword "$RULE_HTTP_PASSWORD"
+			toml_write_string "$file" routeByHTTPUser "$RULE_ROUTE_BY_HTTP_USER"
+			;;
+	esac
+
+	toml_write_string "$file" transport.bandwidthLimit "$RULE_BANDWIDTH_LIMIT"
+	toml_write_string "$file" transport.bandwidthLimitMode "$RULE_BANDWIDTH_MODE"
+	toml_write_scalar "$file" transport.useEncryption "$RULE_USE_ENCRYPTION"
+	toml_write_scalar "$file" transport.useCompression "$RULE_USE_COMPRESSION"
+	toml_write_string "$file" transport.proxyProtocolVersion "$RULE_PROXY_PROTOCOL"
+	toml_write_string "$file" loadBalancer.group "$RULE_LB_GROUP"
+	toml_write_string "$file" loadBalancer.groupKey "$RULE_LB_GROUP_KEY"
+
+	toml_write_string "$file" healthCheck.type "$RULE_HEALTH_TYPE"
+	toml_write_string "$file" healthCheck.path "$RULE_HEALTH_PATH"
+	toml_write_scalar "$file" healthCheck.timeoutSeconds "$RULE_HEALTH_TIMEOUT"
+	toml_write_scalar "$file" healthCheck.maxFailed "$RULE_HEALTH_MAX_FAILED"
+	toml_write_scalar "$file" healthCheck.intervalSeconds "$RULE_HEALTH_INTERVAL"
+
+	append_raw_options "$file" "$section" extra_options
+
+	[ -n "$RULE_PLUGIN_TYPE" ] || return 0
+	printf '\n[proxies.plugin]\n' >> "$file" || { TOML_WRITE_ERROR=1; RENDER_ERROR=1; return 1; }
+	toml_write_string "$file" type "$RULE_PLUGIN_TYPE"
+	case "$RULE_PLUGIN_TYPE" in
+		unix_domain_socket)
+			toml_write_string "$file" unixPath "$RULE_PLUGIN_UNIX_PATH" ;;
+		http_proxy)
+			toml_write_string "$file" httpUser "$RULE_PLUGIN_HTTP_USER"
+			toml_write_string "$file" httpPassword "$RULE_PLUGIN_HTTP_PASSWORD" ;;
+		socks5)
+			toml_write_string "$file" username "$RULE_PLUGIN_USERNAME"
+			toml_write_string "$file" password "$RULE_PLUGIN_PASSWORD" ;;
+		static_file)
+			toml_write_string "$file" localPath "$RULE_PLUGIN_LOCAL_PATH"
+			toml_write_string "$file" stripPrefix "$RULE_PLUGIN_STRIP_PREFIX"
+			toml_write_string "$file" httpUser "$RULE_PLUGIN_HTTP_USER"
+			toml_write_string "$file" httpPassword "$RULE_PLUGIN_HTTP_PASSWORD" ;;
+		https2http|https2https)
+			toml_write_string "$file" localAddr "$RULE_PLUGIN_LOCAL_ADDR"
+			toml_write_string "$file" hostHeaderRewrite "$RULE_PLUGIN_HOST_REWRITE"
+			toml_write_scalar "$file" enableHTTP2 "$RULE_PLUGIN_ENABLE_HTTP2"
+			toml_write_string "$file" crtPath "$RULE_PLUGIN_CERT"
+			toml_write_string "$file" keyPath "$RULE_PLUGIN_KEY" ;;
+		http2https|http2http)
+			toml_write_string "$file" localAddr "$RULE_PLUGIN_LOCAL_ADDR"
+			toml_write_string "$file" hostHeaderRewrite "$RULE_PLUGIN_HOST_REWRITE" ;;
+		tls2raw)
+			toml_write_string "$file" localAddr "$RULE_PLUGIN_LOCAL_ADDR"
+			toml_write_string "$file" crtPath "$RULE_PLUGIN_CERT"
+			toml_write_string "$file" keyPath "$RULE_PLUGIN_KEY" ;;
+	esac
+	append_raw_options "$file" "$section" extra_options_plugin
+	return 0
+}
+
+render_config_file() {
+	local section="$1" file="$2"
+
+	load_main_context "$section" || return 1
+	RULE_NAMES=""
+	RENDER_ERROR=0
+	TOML_WRITE_ERROR=0
+
+	: > "$file" || return 1
+	toml_write_string "$file" user "$MAIN_USER"
+	toml_write_string "$file" clientID "$MAIN_CLIENT_ID"
+	toml_write_string "$file" serverAddr "$SERVER_ADDR"
+	toml_write_scalar "$file" serverPort "$SERVER_PORT"
+	toml_write_string "$file" natHoleStunServer "$MAIN_STUN"
+	toml_write_string "$file" dnsServer "$MAIN_DNS"
+	toml_write_scalar "$file" udpPacketSize "$MAIN_UDP_PACKET"
+	toml_write_scalar "$file" loginFailExit "$MAIN_LOGIN_FAIL_EXIT"
+
+	toml_write_string "$file" auth.method "$SERVER_AUTH_METHOD"
+	if [ "$SERVER_AUTH_METHOD" = token ]; then
+		if [ -n "$SERVER_TOKEN_SOURCE_TYPE" ]; then
+			toml_write_string "$file" auth.tokenSource.type "$SERVER_TOKEN_SOURCE_TYPE"
+			toml_write_string "$file" auth.tokenSource.file.path "$SERVER_TOKEN_SOURCE_PATH"
+		else
+			toml_write_string "$file" auth.token "$SERVER_AUTH_TOKEN"
+		fi
+	fi
+	toml_write_array_from_uci "$file" auth.additionalScopes "$MAIN_SERVER" auth__additionalScopes
+	if [ "$SERVER_AUTH_METHOD" = oidc ]; then
+		toml_write_string "$file" auth.oidc.clientID "$SERVER_OIDC_CLIENT_ID"
+		toml_write_string "$file" auth.oidc.clientSecret "$SERVER_OIDC_CLIENT_SECRET"
+		toml_write_string "$file" auth.oidc.audience "$SERVER_OIDC_AUDIENCE"
+		toml_write_string "$file" auth.oidc.scope "$SERVER_OIDC_SCOPE"
+		toml_write_string "$file" auth.oidc.tokenEndpointURL "$SERVER_OIDC_ENDPOINT"
+		toml_write_string "$file" auth.oidc.trustedCaFile "$SERVER_OIDC_CA"
+		toml_write_scalar "$file" auth.oidc.insecureSkipVerify "$SERVER_OIDC_INSECURE"
+		toml_write_string "$file" auth.oidc.proxyURL "$SERVER_OIDC_PROXY"
+	fi
+
+	toml_write_array_from_uci "$file" includes "$section" includes
+	toml_write_string "$file" store.path "$MAIN_STORE_PATH"
+
+	# Follow ImmortalWrt FRP 0.66.0: FRP logs to console and procd/logd owns delivery.
+	toml_write_string "$file" log.level "$MAIN_LOG_LEVEL"
+
+	toml_write_string "$file" transport.protocol "$MAIN_PROTOCOL"
+	toml_write_string "$file" transport.wireProtocol "$MAIN_WIRE_PROTOCOL"
+	toml_write_scalar "$file" transport.poolCount "$MAIN_POOL_COUNT"
+	toml_write_scalar "$file" transport.tcpMux "$SERVER_TCP_MUX"
+	toml_write_scalar "$file" transport.tcpMuxKeepaliveInterval "$SERVER_TCP_MUX_KEEPALIVE"
+	toml_write_scalar "$file" transport.dialServerTimeout "$MAIN_DIAL_TIMEOUT"
+	toml_write_scalar "$file" transport.dialServerKeepalive "$MAIN_DIAL_KEEPALIVE"
+	toml_write_string "$file" transport.connectServerLocalIP "$MAIN_CONNECT_LOCAL_IP"
+	toml_write_scalar "$file" transport.quic.keepalivePeriod "$MAIN_QUIC_KEEPALIVE"
+	toml_write_scalar "$file" transport.quic.maxIdleTimeout "$MAIN_QUIC_IDLE"
+	toml_write_scalar "$file" transport.quic.maxIncomingStreams "$MAIN_QUIC_STREAMS"
+	toml_write_string "$file" transport.proxyURL "$MAIN_PROXY_URL"
+	toml_write_scalar "$file" transport.tls.enable "$MAIN_TLS_ENABLE"
+	toml_write_scalar "$file" transport.tls.disableCustomTLSFirstByte "$MAIN_TLS_DISABLE_FIRST_BYTE"
+	toml_write_string "$file" transport.tls.certFile "$MAIN_TLS_CERT"
+	toml_write_string "$file" transport.tls.keyFile "$MAIN_TLS_KEY"
+	toml_write_string "$file" transport.tls.trustedCaFile "$MAIN_TLS_CA"
+	toml_write_string "$file" transport.tls.serverName "$MAIN_TLS_SERVER_NAME"
+	toml_write_scalar "$file" transport.heartbeatInterval "$MAIN_HEARTBEAT_INTERVAL"
+	toml_write_scalar "$file" transport.heartbeatTimeout "$MAIN_HEARTBEAT_TIMEOUT"
+
+	toml_write_string "$file" webServer.addr "$MAIN_WEB_ADDR"
+	toml_write_scalar "$file" webServer.port "$MAIN_WEB_PORT"
+	toml_write_string "$file" webServer.user "$MAIN_WEB_USER"
+	toml_write_string "$file" webServer.password "$MAIN_WEB_PASSWORD"
+	toml_write_string "$file" webServer.assetsDir "$MAIN_WEB_ASSETS"
+	toml_write_string "$file" webServer.tls.certFile "$MAIN_WEB_CERT"
+	toml_write_string "$file" webServer.tls.keyFile "$MAIN_WEB_KEY"
+	toml_write_scalar "$file" webServer.pprofEnable "$MAIN_WEB_PPROF"
+
+	append_raw_options "$file" "$section" com_extra_options
+	config_foreach render_rule rule "$file" || true
+	[ "$RENDER_ERROR" -eq 0 ] || return 1
+	[ "$TOML_WRITE_ERROR" -eq 0 ] || return 1
+	return 0
+}
+
+verify_config_file() {
+	local binary="$1" file="$2" output
+	output="$("$binary" verify -c "$file" 2>&1)" || {
+		_err "Generated configuration is invalid: ${output:-unknown error}"
+		return 1
+	}
+	return 0
+}
+
+create_config_file() (
+	local section="$1" final_file="$2" tmp_file
+	umask 077
+	mkdir -p "$CONFIG_FOLDER" || exit 1
+	chmod 0700 "$CONFIG_FOLDER" || exit 1
+	tmp_file="$(mktemp "$CONFIG_FOLDER/.frpc.${section}.XXXXXX")" || exit 1
+	trap 'rm -f "$tmp_file"' EXIT HUP INT TERM
+
+	render_config_file "$section" "$tmp_file" || exit 1
+	verify_config_file "$MAIN_CLIENT_FILE" "$tmp_file" || exit 1
+	chmod 0600 "$tmp_file" || exit 1
+	if [ -n "$MAIN_RUN_USER" ]; then
+		chown "$MAIN_RUN_USER" "$CONFIG_FOLDER" "$tmp_file" || exit 1
+	else
+		chown root:root "$CONFIG_FOLDER" "$tmp_file" 2>/dev/null || exit 1
+	fi
+	chmod 0700 "$CONFIG_FOLDER" || exit 1
+	chmod 0600 "$tmp_file" || exit 1
+	mv -f "$tmp_file" "$final_file" || exit 1
+	trap - EXIT HUP INT TERM
+)
+
+resolve_frpc_core() {
+	local file="${1:-/usr/bin/frpc}"
+
+	[ -n "$file" ] || file="/usr/bin/frpc"
+	[ -f "$file" ] && [ -x "$file" ] || return 1
+
+	printf '%s' "$file"
+}
+
+# Verify-only path for a disabled instance on Save & Apply.
+# Renders a private candidate and lets the FRPC Core check it exactly once.
+# Never touches /var/etc/$NAME/frpc.$section.toml and never changes service state.
+verify_saved_config() {
+	local section="$1"
+	local tmp_dir tmp_file rc=0
+
+	umask 077
+	tmp_dir="$(mktemp -d /tmp/${NAME}-applyverify.XXXXXX)" || return 1
+	tmp_file="$tmp_dir/frpc.toml"
+
+	render_config_file "$section" "$tmp_file" || rc=1
+	if [ "$rc" -eq 0 ]; then
+		verify_config_file "$MAIN_CLIENT_FILE" "$tmp_file" || rc=1
+	fi
+
+	rm -rf "$tmp_dir"
+	return "$rc"
+}
+
+preview_config() (
+	local section="${1:-main}" tmp_dir tmp_file
+	umask 077
+	config_load "$NAME" || exit 1
+	tmp_dir="$(mktemp -d /tmp/${NAME}-preview.XXXXXX)" || exit 1
+	tmp_file="$tmp_dir/frpc.toml"
+	trap 'rm -rf "$tmp_dir"' EXIT HUP INT TERM
+
+	render_config_file "$section" "$tmp_file" || {
+		_err "Failed to render candidate TOML for preview"
+		exit 13
+	}
+
+	cat "$tmp_file"
+)
+
+start_instance() {
+	local section="$1" config_file zonename tzfile enabled
+
+	[ "$section" = main ] || {
+		_info "Ignoring unsupported frpc section: $section"
+		return 0
+	}
+
+	config_get_bool enabled "$section" enabled 0
+	[ "$enabled" = 1 ] || {
+		_info "Instance $section is disabled"
+		return 0
+	}
+
+	load_main_context "$section" || return 1
+	if [ -n "$MAIN_RUN_USER" ] && ! id "$MAIN_RUN_USER" >/dev/null 2>&1; then
+		_err "Configured run user does not exist: $MAIN_RUN_USER"
+		return 1
+	fi
+	if ! resolve_frpc_core "$MAIN_CLIENT_FILE" >/dev/null; then
+		_err "Client file is not a valid executable: $MAIN_CLIENT_FILE"
+		return 1
+	fi
+
+	config_file="$CONFIG_FOLDER/frpc.$section.toml"
+
+	if [ "${FRPC_APPLY_PREVERIFIED:-0}" = "1" ]; then
+		[ -f "$config_file" ] || {
+			_err "Pre-verified runtime configuration is missing: $config_file"
+			return 1
+		}
+	else
+		create_config_file "$section" "$config_file" || {
+			_err "Could not create and verify configuration: $config_file"
+			return 1
+		}
+	fi
+
+	procd_open_instance "$section"
+	procd_set_param command "$MAIN_CLIENT_FILE" -c "$config_file"
+	procd_set_param stdout 1
+	procd_set_param stderr 1
+	[ "$MAIN_RESPAWN" = 1 ] && procd_set_param respawn 3600 5 5
+	procd_set_param file "$MAIN_CLIENT_FILE" "$config_file"
+	[ -n "$MAIN_RUN_USER" ] && procd_set_param user "$MAIN_RUN_USER"
+
+	zonename="$(uci -q get system.@system[0].zonename)"
+	tzfile="/usr/share/zoneinfo/$zonename"
+	[ -n "$zonename" ] && [ -r "$tzfile" ] && procd_set_param env TZ="$tzfile"
+	procd_close_instance
+}
+
+service_triggers() {
+	procd_add_reload_trigger "$NAME"
+}
+
+start_service() {
+	umask 077
+	config_load "$NAME"
+	config_foreach start_instance frpc
+}
+
+reload_service() {
+	local section="main"
+
+	config_load "$NAME" || return 1
+	load_main_context "$section" || {
+		_err "Failed to load FRPC main context for $section"
+		return 1
+	}
+
+	if [ "$MAIN_ENABLED" != "1" ]; then
+		if ! resolve_frpc_core "$MAIN_CLIENT_FILE" >/dev/null; then
+			start
+			_info "configuration saved, Core unavailable, configuration was not Core-verified"
+			return 0
+		fi
+		if ! verify_saved_config "$section"; then
+			_err "Saved configuration failed FRPC Core verification; keeping the current runtime and service state"
+			return 1
+		fi
+		start
+		return 0
+	fi
+
+	if ! resolve_frpc_core "$MAIN_CLIENT_FILE" >/dev/null; then
+		_info "configuration saved but not Core-verified/applied because FRPC Core is unavailable"
+		return 0
+	fi
+
+	if [ -n "$MAIN_RUN_USER" ] && ! id "$MAIN_RUN_USER" >/dev/null 2>&1; then
+		_err "Configured run user does not exist: $MAIN_RUN_USER"
+		return 1
+	fi
+
+	local config_file rc
+
+	config_file="$CONFIG_FOLDER/frpc.$section.toml"
+
+	if ! create_config_file "$section" "$config_file"; then
+		_err "Saved configuration failed FRPC Core verification; keeping the current runtime and service state"
+		return 1
+	fi
+
+	FRPC_APPLY_PREVERIFIED=1
+	start
+	rc=$?
+	FRPC_APPLY_PREVERIFIED=0
+
+	return "$rc"
+}

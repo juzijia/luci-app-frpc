@@ -1,0 +1,43 @@
+{
+  "luci-app-frpc-advanced": {
+    "description": "Grant access to LuCI app FRPC Advanced",
+    "read": {
+      "file": {
+        "/etc/passwd": [
+          "read"
+        ],
+        "/etc/init.d/frpc-advanced": [
+          "exec"
+        ]
+      },
+      "ubus": {
+        "luci.frpc-advanced": [
+          "get_status",
+          "get_version",
+          "get_config",
+          "get_config_compare",
+          "validate_backup"
+        ],
+        "log": [
+          "read"
+        ],
+        "service": [
+          "list"
+        ]
+      },
+      "uci": [
+        "frpc-advanced"
+      ]
+    },
+    "write": {
+      "ubus": {
+        "luci.frpc-advanced": [
+          "restore_config"
+        ]
+      },
+      "uci": [
+        "frpc-advanced"
+      ]
+    }
+  }
+}

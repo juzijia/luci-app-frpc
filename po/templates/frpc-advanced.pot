@@ -1,0 +1,1397 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1506
+msgid "Access & Protocol"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1829
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1840
+msgid "Add FRPS Server"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2080
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2086
+msgid "Add Rule"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1056
+msgid "Added"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1895
+msgid "Additional auth scopes"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1788
+msgid "Additional proxy configurations"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1852
+msgid "Address"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1860
+msgid "Address or domain name. IPv6 is supported."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1803
+msgid "Admin assets directory"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1804
+msgid "Admin panel TLS certificate"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1806
+msgid "Admin panel TLS private key"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1801
+msgid "Admin password"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1798
+msgid "Admin port"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1800
+msgid "Admin user"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1615
+msgid "Advanced"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1831
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2082
+msgid "Advanced Settings"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1792
+msgid ""
+"Advanced raw TOML lines appended to the common configuration. Invalid syntax "
+"prevents startup."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2452
+msgid "Advanced raw TOML lines appended to this proxy or visitor."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2297
+msgid "Allowed users"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1308
+msgid "Authentication"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1871
+msgid "Authentication Method"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1876
+msgid "Authentication token"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1183
+msgid ""
+"Back up the current saved configuration or restore it from a backup file."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1060
+msgid "Backend validation failed"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1116
+msgid "Backup exported successfully."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1190
+msgid "Backup source"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1061
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1077
+msgid "Backup validation failed:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1055
+msgid "Backup validation passed."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2351
+msgid "Bandwidth limit"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2354
+msgid "Bandwidth limit mode"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1610
+msgid "Basic"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1830
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2081
+msgid "Basic Settings"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1809
+msgid "Built-in Store file"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1123
+msgid "Cancel"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:196
+msgid "Candidate configuration is empty."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:196
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:198
+msgid "Candidate generation failed."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1056
+msgid "Changed"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2559
+msgid "Check version after saving the new path"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:189
+msgid "Clear Log"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1713
+msgid "Client ID"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2357
+msgid "Client Side"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1182
+msgid "Configuration Backup & Restore"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1813
+msgid "Configuration Backup && Restore"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:257
+msgid "Configuration path:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:997
+msgid "Configuration restored successfully, FRPC has been reloaded."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:999
+msgid "Configuration restored successfully, FRPC is currently not running."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1001
+msgid "Configuration restored successfully, FRPC running state is unknown."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1003
+msgid "Configuration restored successfully, but FRPC reload failed."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1127
+msgid "Confirm Export"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1747
+msgid "Connect server local IP"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1754
+msgid "Connect to FRPS through an HTTP, SOCKS5, SOCKS5H, or NTLM proxy."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1314
+msgid "Connection Optimization"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1734
+msgid "Connection pool count"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2133
+msgid ""
+"Connects to an STCP, XTCP, or SUDP private proxy published by another FRPC "
+"client."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:69
+msgid ""
+"Controls where the proxy bandwidth limit is enforced. Client applies the "
+"limit in FRPC; Server applies it in FRPS. Default leaves the setting unset, "
+"and FRP Core uses client-side enforcement."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1640
+msgid "Current FRPS server"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:903
+msgid "Current FRPS server selection is missing or stale."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:121
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:201
+msgid "Current Runtime Configuration"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1191
+msgid "Current saved FRP configuration"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2572
+msgid "Current version"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2245
+msgid "Custom domains"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1781
+msgid "DNS server"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2356
+msgid "Default"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:61
+msgid ""
+"Default is 127.0.0.1 for local access only. Set it to 0.0.0.0 to allow LAN "
+"access. WAN access is controlled by the OpenWrt / ImmortalWrt firewall "
+"rules. Configure a management panel username and password to prevent "
+"unauthorized access."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1795
+msgid ""
+"Default is 127.0.0.1. Set to 0.0.0.0 to listen on all network interfaces."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1635
+msgid "Default: root"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2529
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2564
+msgid "Detecting version…"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1742
+msgid "Dial server keepalive"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1738
+msgid "Dial server timeout"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2325
+msgid "Disable assisted NAT addresses"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1945
+msgid "Disable custom TLS first byte"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2385
+msgid "Disabled"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1604
+msgid "Display mode"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:218
+msgid ""
+"Displays recent FRPC system logs, up to 100 lines or 12 KiB, refreshing "
+"every 5 seconds. Clear Log only clears this display."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1562
+msgid "Documentation"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2214
+msgid "Domains:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:939
+msgid "Each server must contain a boolean selected field."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2087
+msgid "Edit Rule"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1629
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1845
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2090
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2110
+msgid "Enable"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1942
+msgid "Enable TLS"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1808
+msgid "Enable pprof"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:838
+msgid "Enter a subdomain or at least one custom domain."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:946
+msgid "Exactly one server must be selected."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2351
+msgid "Example: 3MB or 500KB."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1630
+msgid "Executable file path"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1715
+msgid "Exit on login failure"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1120
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1187
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1194
+msgid "Export Configuration"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1130
+msgid "Export failed:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1814
+msgid ""
+"Export or restore FRP configuration. Local executable and service settings "
+"are preserved. Only accepts JSON backups exported by this plugin."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1188
+msgid "Export the current saved FRPC configuration as a JSON backup file."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:64
+msgid ""
+"Extends authentication to HeartBeats and/or NewWorkConns. FRPS must enable "
+"matching additional scopes so heartbeat and new work connection requests "
+"remain authenticated."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1627
+msgid "Extension Features"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1791
+msgid "Extra TOML options"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1729
+msgid "FRP Wire Protocol"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2355
+msgid "FRP default: Client side."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2321
+msgid "FRP default: Disabled. Enable only for long-lived XTCP connections."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1808
+msgid "FRP default: Disabled. Enable only for troubleshooting."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2365
+msgid "FRP default: Disabled. Enable only when bandwidth is very limited."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2362
+msgid "FRP default: Disabled. Enable only when you need per-proxy encryption."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1946
+msgid ""
+"FRP default: Enabled. Disable only for compatibility with older proxies."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1971
+msgid "FRP default: Enabled. Disable only for low-resource environments."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2446
+msgid ""
+"FRP default: Enabled. Disable only when the backend does not support HTTP/2."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1716
+msgid "FRP default: Enabled. Disable only when you need to keep retrying."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1943
+msgid ""
+"FRP default: Enabled. Disable only when your server does not support TLS."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1560
+msgid ""
+"FRP is a high-performance reverse proxy application for exposing private "
+"services."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2298
+msgid ""
+"FRPC users allowed to access this private proxy. Leave empty to allow only "
+"the same user; enter `*` to allow all users."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1842
+msgid "FRPS Server"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1825
+msgid "FRPS Server Configurations"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1085
+msgid "Failed to read backup file."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2313
+msgid "Fallback timeout (ms)"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2312
+msgid "Fallback visitor"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1025
+msgid "File is empty or too small."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:266
+msgid "File path:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1027
+msgid "File too large, max 256 KiB."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2326
+msgid ""
+"For XTCP, use only STUN-discovered public addresses instead of local network "
+"interfaces. FRP default: Disabled."
+msgstr ""
+
+#: root/usr/share/luci/menu.d/luci-app-frpc-advanced.json:3
+msgid "Frp Client"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:213
+msgid "Frp client not enabled"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:216
+msgid "Frp client running"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:219
+msgid "Frp client start failed"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:222
+msgid "Frp client stopped"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2578
+msgid "Frp executable not found; install or upload it and retry"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:192
+msgid ""
+"Generated from the saved UCI configuration. Candidate config; verified on "
+"Save & Apply."
+msgstr ""
+
+#: root/usr/share/rpcd/acl.d/luci-app-frpc-advanced.json:3
+msgid "Grant access to LuCI app FRPC Advanced"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2387
+msgid "HTTP"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2341
+msgid "HTTP password"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2337
+msgid "HTTP user"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2390
+msgid "Health check HTTP path"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2407
+msgid "Health check interval"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2406
+msgid "Health check max failures"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2405
+msgid "Health check timeout"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2384
+msgid "Health check type"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1773
+msgid "Heartbeat interval"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1777
+msgid "Heartbeat timeout"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2334
+msgid "Host header rewrite"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1199
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1207
+msgid "Import & Restore"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1172
+msgid "Import failed:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:966
+msgid ""
+"Import will overwrite the current saved configuration. Local executable and "
+"service settings are preserved."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:248
+msgid ""
+"Important: TOML may contain tokens, passwords, and certificate paths. Do not "
+"screenshot or share it publicly."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1118
+msgid ""
+"Important: The backup file contains tokens, passwords, and other sensitive "
+"information. Keep it secure."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1140
+msgid "Importing..."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1938
+msgid "Insecure. Use only for debugging. FRP default: Disabled."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1730
+msgid ""
+"Internal FRP message protocol between FRPC and FRPS. Leave empty to use the "
+"FRP default: v1."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:932
+msgid "Internal setting is not allowed in backup:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:919
+msgid "Invalid backup format."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2320
+msgid "Keep tunnel open"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:201
+msgid "Last Generated Runtime Configuration"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2239
+msgid ""
+"Leave empty to let FRPS assign a random remote port. Setting 0 has the same "
+"effect."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2257
+msgid "Leave empty to use the current Frpc user."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1508
+msgid "Load Balancing & Health Check"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2376
+msgid "Load balancer group"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2379
+msgid "Load balancer group key"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2179
+msgid "Local / Bind"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2224
+msgid "Local address"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2229
+msgid "Local port"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2233
+msgid "Local port is required."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2331
+msgid "Locations"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:174
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:192
+msgid "Log display cleared. New FRPC log entries will appear automatically."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1718
+msgid "Log level"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1626
+msgid "Management Panel"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1795
+msgid "Management panel address"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2310
+msgid "Max retries per hour"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2311
+msgid "Minimum retry interval"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2120
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2168
+msgid "Name"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:176
+msgid "No FRPC log entries yet."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:194
+msgid "No FRPS server has been added. Please add a server first."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1023
+msgid "No backup file selected."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:171
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:172
+msgid "No data."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1135
+msgid "No validated backup data available."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2369
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2418
+msgid "None"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1873
+msgid "OIDC"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1361
+msgid "OIDC Advanced Settings"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1905
+msgid "OIDC audience"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:65
+msgid ""
+"OIDC audience requested for the access token. Configure it only when the "
+"identity provider or FRPS requires a specific audience."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1903
+msgid "OIDC client ID"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1904
+msgid "OIDC client secret"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:66
+msgid ""
+"OIDC endpoint from which FRPC obtains an access token. Use the Token "
+"Endpoint provided by your identity provider."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1937
+msgid "OIDC insecure skip verify"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1930
+msgid "OIDC proxy URL"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1928
+msgid "OIDC scope"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:67
+msgid ""
+"OIDC scopes requested when obtaining the access token. They must be allowed "
+"by the identity provider."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1906
+msgid "OIDC token endpoint URL"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1929
+msgid "OIDC trusted CA file"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1713
+msgid "Optional stable identifier for this frpc instance."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1896
+msgid "Optional. Additional authentication scopes are disabled by default."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1055
+msgid "Options"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2367
+msgid "PROXY Protocol Version"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2368
+msgid ""
+"Passes original connection information to the local backend, which must "
+"support PROXY Protocol. Disabled by default and unrelated to the internal "
+"FRP protocol between FRPC and FRPS."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1630
+msgid "Path to the frpc binary."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1810
+msgid "Persists proxies and visitors managed through the FRPC web API."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1657
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1692
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1705
+msgid "Please add an FRPS server first"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1024
+msgid "Please select a .json backup file."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1648
+msgid "Please select an FRPS server"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2432
+msgid "Plugin HTTP password"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2431
+msgid "Plugin HTTP user"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2426
+msgid "Plugin Unix socket path"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2434
+msgid "Plugin certificate path"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2445
+msgid "Plugin enable HTTP/2"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2455
+msgid "Plugin extra options"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2436
+msgid "Plugin host header rewrite"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2435
+msgid "Plugin key path"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2433
+msgid "Plugin local address"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2429
+msgid "Plugin local path"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2428
+msgid "Plugin password"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2430
+msgid "Plugin strip prefix"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2417
+msgid "Plugin type"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2427
+msgid "Plugin username"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1509
+msgid "Plugins & Extensions"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2204
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2205
+msgid "Port:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1714
+msgid "Prefix applied to proxy names."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2220
+msgid "Private proxy"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1753
+msgid "Proxy address"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2076
+msgid "Proxy and Visitor Rules"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1758
+msgid "QUIC keepalive period"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1763
+msgid "QUIC max idle timeout"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1768
+msgid "QUIC max incoming streams"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2204
+msgid "Random"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:74
+msgid ""
+"Raw TOML options appended to the selected plugin configuration. Invalid "
+"syntax or duplicate keys may make the generated FRPC configuration invalid."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1881
+msgid "Read token from file"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1033
+msgid "Reading and validating backup file..."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:63
+msgid ""
+"Reads the authentication token from a plain text file instead of storing it "
+"inline. Do not configure both an inline token and a token file."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:200
+msgid "Refresh"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2189
+msgid "Remote Configuration"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2238
+msgid "Remote port"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1056
+msgid "Removed"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1638
+msgid "Respawn when crashed"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:70
+msgid ""
+"Rewrites the HTTP Host header before forwarding the request to the local "
+"backend. Use it when the backend expects a specific virtual-host domain."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2346
+msgid "Route by HTTP user"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:949
+msgid "Rule entry must be an object."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2451
+msgid "Rule extra options"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:782
+msgid "Rule name is required."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:791
+msgid "Rule names must be unique."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1624
+msgid "Run & Log"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:60
+msgid ""
+"Run FRPC as another system user to reduce privileges. Ensure that user can "
+"read the configuration, certificates, keys, and other required files."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1635
+msgid "Run daemon as user"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:218
+msgid "Running"
+msgstr ""
+
+#: root/usr/share/luci/menu.d/luci-app-frpc-advanced.json:34
+msgid "Running Log"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:212
+msgid "Runtime configuration file is empty"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:211
+msgid "Runtime configuration file is too large"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:210
+msgid "Runtime configuration file not found"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:206
+msgid "Runtime configuration is available."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:215
+msgid "Runtime configuration is unavailable."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1783
+msgid "STUN server"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:255
+msgid "Saved Configuration Preview"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1774
+msgid "Seconds. A negative value disables application-layer heartbeats."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2280
+msgid "Secret key"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1203
+msgid "Select Backup File"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1200
+msgid ""
+"Select a backup file. The router will validate it before restoring the "
+"configuration."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1640
+msgid ""
+"Select the FRPS server configuration currently used by this FRPC Client."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1848
+msgid "Server Name"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2358
+msgid "Server Side"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1860
+msgid "Server address"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:938
+msgid "Server entry must be an object."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2256
+msgid "Server name"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1866
+msgid "Server port"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2257
+msgid "Server user"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:218
+msgid "Service status"
+msgstr ""
+
+#: root/usr/share/luci/menu.d/luci-app-frpc-advanced.json:12
+msgid "Settings"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:73
+msgid ""
+"Shared authentication key for private STCP, XTCP, or SUDP proxies. The "
+"visitor and remote proxy must use the same key."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1599
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1618
+msgid "Show all settings"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1599
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1618
+msgid "Show common settings only"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:156
+msgid "Show differences only"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:156
+msgid "Show full configuration"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:218
+msgid "Stopped"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2249
+msgid "Subdomain"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2217
+msgid "Subdomain:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2386
+msgid "TCP"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1970
+msgid "TCP multiplexing"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1973
+msgid "TCP mux keepalive interval"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1323
+msgid "TLS"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1960
+msgid "TLS CA certificate path"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:68
+msgid ""
+"TLS client authentication group: certFile and keyFile form the client "
+"certificate pair for mTLS; trustedCaFile verifies the FRPS certificate; "
+"serverName overrides the certificate name used for verification."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1950
+msgid "TLS client certificate path"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1955
+msgid "TLS client key file path"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1965
+msgid "TLS server name"
+msgstr ""
+
+#: root/usr/share/luci/menu.d/luci-app-frpc-advanced.json:23
+msgid "TOML Comparison"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1789
+msgid ""
+"TOML files or glob patterns. Included files may define only proxies and "
+"visitors."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2200
+msgid "Target:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:824
+msgid "The selected plugin is incompatible with this proxy type."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1119
+msgid "This backup will contain %s configuration options."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:849
+msgid "This field is required by the selected plugin."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2398
+msgid "This field is required for HTTP health checks."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2291
+msgid "This field is required for private proxies."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2272
+msgid "This field is required in visitor mode."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1921
+msgid "This field is required when OIDC authentication is selected."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:230
+msgid ""
+"This page is read-only and will not modify the configuration or reload FRPC."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:62
+msgid ""
+"Token uses a shared secret between FRPC and FRPS. OIDC obtains an access "
+"token from an identity provider; use it only when the server is configured "
+"for OIDC authentication."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1625
+msgid "Transport & Limits"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1507
+msgid "Transport & Traffic"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1724
+msgid "Transport protocol"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2123
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2173
+msgid "Type"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:951
+msgid "UCI metadata is not allowed in rule backup data."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:942
+msgid "UCI metadata is not allowed in server backup data."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1785
+msgid "UDP packet size"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:110
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:187
+msgid "Unable to load TOML comparison data."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:213
+msgid "Unable to read runtime configuration"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:210
+msgid "Unable to read service status"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2581
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2585
+msgid "Unable to read version; refresh and retry"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1068
+msgid "Unable to validate backup on router:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1725
+msgid "Underlying transport used for the FRPC to FRPS connection."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1738
+msgid "Unit: seconds."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1743
+msgid "Unit: seconds. Use a negative value to disable keepalive probes."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:922
+msgid "Unsupported backup field:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:924
+msgid "Unsupported format:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:925
+msgid "Unsupported schema version:"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2364
+msgid "Use compression"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2361
+msgid "Use encryption"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1719
+msgid ""
+"Use info for daily use; debug/trace only for short-term troubleshooting."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1783
+msgid "Used for XTCP NAT traversal."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1849
+msgid "Used to distinguish multiple FRPS servers."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1714
+msgid "User prefix"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:71
+msgid ""
+"Uses an FRPC built-in plugin instead of normal local IP and port forwarding. "
+"Selecting a plugin changes which local backend fields are used."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1044
+msgid "Validating backup on router…"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2258
+msgid "Visitor bind address"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2259
+msgid "Visitor bind port"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2132
+msgid "Visitor mode"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:797
+msgid "Visitor mode supports only STCP, XTCP, and SUDP."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:808
+msgid "Visitor rules cannot use proxy plugins."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:72
+msgid ""
+"Visitor target proxy name. It must match the name of the remote STCP, XTCP, "
+"or SUDP proxy being accessed."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2303
+msgid "XTCP protocol"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:928
+msgid "rules must be an array"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:927
+msgid "servers must be an array"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:926
+msgid "settings must be an object"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1347
+msgid "展开 TLS 详细选项"
+msgstr ""

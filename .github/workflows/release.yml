@@ -1,0 +1,231 @@
+name: Release
+
+run-name: Release from ${{ github.ref_name }}
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+      full_version: ${{ steps.meta.outputs.full_version }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate release target
+        id: meta
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          [ "$GITHUB_REF" = "refs/heads/main" ]
+
+          PKG_VERSION="$(sed -n 's/^PKG_VERSION:=//p' Makefile)"
+          PKG_RELEASE="$(sed -n 's/^PKG_RELEASE:=//p' Makefile)"
+
+          [[ "$PKG_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "$PKG_RELEASE" =~ ^[0-9]+$ ]]
+
+          TAG="v${PKG_VERSION}"
+          FULL_VERSION="${PKG_VERSION}-r${PKG_RELEASE}"
+
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists." >&2
+            exit 1
+          fi
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists." >&2
+            exit 1
+          fi
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "full_version=$FULL_VERSION" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - format: ipk
+            sdk_version: 24.10.6
+            sdk_file: immortalwrt-sdk-24.10.6-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            sdk_url: https://downloads.immortalwrt.org/releases/24.10.6/targets/mediatek/filogic/immortalwrt-sdk-24.10.6-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            sdk_sha256: 8b4340a9b7e8802a7ffa6feb99604a27025cf702baeab052b931f1bfa6a9f638
+          - format: apk
+            sdk_version: 25.12.1
+            sdk_file: immortalwrt-sdk-25.12.1-mediatek-filogic_gcc-14.3.0_musl.Linux-x86_64.tar.zst
+            sdk_url: https://downloads.immortalwrt.org/releases/25.12.1/targets/mediatek/filogic/immortalwrt-sdk-25.12.1-mediatek-filogic_gcc-14.3.0_musl.Linux-x86_64.tar.zst
+            sdk_sha256: 1dede7c6afa3184eda37511e47a628f6674d2da2ce99a65f788f910ec57c9e5a
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Download and verify SDK
+        env:
+          SDK_FILE: ${{ matrix.sdk_file }}
+          SDK_URL: ${{ matrix.sdk_url }}
+          SDK_SHA256: ${{ matrix.sdk_sha256 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p /tmp/sdk-download /tmp/sdk
+
+          curl \
+            --fail \
+            --location \
+            --retry 3 \
+            --retry-all-errors \
+            --retry-delay 15 \
+            --connect-timeout 20 \
+            --max-time 1200 \
+            --output "/tmp/sdk-download/$SDK_FILE" \
+            "$SDK_URL"
+
+          echo "$SDK_SHA256  /tmp/sdk-download/$SDK_FILE" | sha256sum -c -
+          tar -xf "/tmp/sdk-download/$SDK_FILE" -C /tmp/sdk --strip-components=1
+          grep -q '${{ matrix.sdk_version }}' /tmp/sdk/include/version.mk
+
+      - name: Build ${{ matrix.format }}
+        env:
+          FORMAT: ${{ matrix.format }}
+          FULL_VERSION: ${{ needs.preflight.outputs.full_version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          SDK=/tmp/sdk
+          PKG_DIR="$SDK/package/luci-app-frpc-advanced"
+
+          cd "$SDK"
+
+          if [ ! -f feeds/luci/luci.mk ]; then
+            timeout 10m ./scripts/feeds update -a
+            timeout 10m ./scripts/feeds install -a
+          fi
+
+          rm -rf "$PKG_DIR"
+          cp -a "$GITHUB_WORKSPACE" "$PKG_DIR"
+          rm -rf "$PKG_DIR/.git" "$PKG_DIR/dist" "$PKG_DIR/release" "$PKG_DIR/release-apk"
+
+          find bin -type f \( -name '*frpc-advanced*.ipk' -o -name '*frpc-advanced*.apk' \) -delete 2>/dev/null || true
+
+          printf '%s\n' \
+            'CONFIG_PACKAGE_luci-app-frpc-advanced=y' \
+            'CONFIG_PACKAGE_luci-i18n-frpc-advanced-zh-cn=y' >> .config
+
+          make defconfig
+          timeout 35m make package/luci-app-frpc-advanced/compile V=s
+
+          mkdir -p "$GITHUB_WORKSPACE/dist"
+
+          if [ "$FORMAT" = "ipk" ]; then
+            mapfile -t MAIN < <(find bin -type f -name "luci-app-frpc-advanced_${FULL_VERSION}_all.ipk")
+            mapfile -t I18N < <(find bin -type f -name "luci-i18n-frpc-advanced-zh-cn_${FULL_VERSION}_all.ipk")
+            [ "${#MAIN[@]}" -eq 1 ]
+            [ "${#I18N[@]}" -eq 1 ]
+            ! find bin -type f -name '*frpc-advanced*.apk' | grep -q .
+          else
+            mapfile -t MAIN < <(find bin -type f -name 'luci-app-frpc-advanced*.apk' | sort)
+            mapfile -t I18N < <(find bin -type f -name 'luci-i18n-frpc-advanced-zh-cn*.apk' | sort)
+            [ "${#MAIN[@]}" -eq 1 ]
+            [ "${#I18N[@]}" -eq 1 ]
+            case "$(basename "${MAIN[0]}")" in *"$FULL_VERSION"*.apk) ;; *) exit 1 ;; esac
+            case "$(basename "${I18N[0]}")" in *"$FULL_VERSION"*.apk) ;; *) exit 1 ;; esac
+            ! find bin -type f -name '*frpc-advanced*.ipk' | grep -q .
+          fi
+
+          cp "${MAIN[0]}" "${I18N[0]}" "$GITHUB_WORKSPACE/dist/"
+          find "$GITHUB_WORKSPACE/dist" -maxdepth 1 -type f -size 0 -print -quit | grep -q . && exit 1 || true
+          ls -lh "$GITHUB_WORKSPACE/dist"
+
+      - name: Upload ${{ matrix.format }} artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.format }}
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs:
+      - preflight
+      - build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download package artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: release-*
+          path: dist
+          merge-multiple: true
+
+      - name: Verify release assets
+        env:
+          FULL_VERSION: ${{ needs.preflight.outputs.full_version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          [ "$(find dist -maxdepth 1 -type f -name '*.ipk' | wc -l)" -eq 2 ]
+          [ "$(find dist -maxdepth 1 -type f -name '*.apk' | wc -l)" -eq 2 ]
+
+          while IFS= read -r file; do
+            [ -s "$file" ]
+            case "$(basename "$file")" in
+              *"$FULL_VERSION"*) ;;
+              *) echo "Unexpected package version: $file" >&2; exit 1 ;;
+            esac
+          done < <(find dist -maxdepth 1 -type f \( -name '*.ipk' -o -name '*.apk' \) | sort)
+
+          (
+            cd dist
+            sha256sum *.ipk *.apk | sort -k2 > SHA256SUMS
+            sha256sum -c SHA256SUMS
+          )
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.preflight.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          gh release create "$TAG" \
+            dist/*.ipk \
+            dist/*.apk \
+            dist/SHA256SUMS \
+            --target "$GITHUB_SHA" \
+            --title "luci-app-frpc $TAG" \
+            --generate-notes

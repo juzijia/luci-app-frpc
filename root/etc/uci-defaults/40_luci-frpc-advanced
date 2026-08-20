@@ -1,0 +1,163 @@
+#!/bin/sh
+
+. /lib/functions.sh
+
+NAME='frpc-advanced'
+SCHEMA_VERSION='2'
+VERIFY_LOG='/tmp/frpc-advanced-migration-verify.log'
+
+# ImmortalWrt FRP 0.66.0 uses stdout/stderr -> procd -> logd. Remove legacy
+# per-plugin file-log controls even on systems already migrated to schema v2.
+logging_cleanup_changed=0
+for option in enable_logging std_redirect log__to log__maxDays log__disablePrintColor; do
+	if uci -q get "$NAME.main.$option" >/dev/null; then
+		uci -q delete "$NAME.main.$option"
+		logging_cleanup_changed=1
+	fi
+done
+[ "$logging_cleanup_changed" = 1 ] && uci commit "$NAME"
+
+current_schema="$(uci -q get "$NAME.main.schema_version")"
+[ "$current_schema" = "$SCHEMA_VERSION" ] && {
+	rm -f /tmp/luci-indexcache.*
+	rm -rf /tmp/luci-modulecache/
+	exit 0
+}
+
+[ "$(uci -q get "$NAME.main")" = 'frpc' ] || exit 0
+
+backup_tmp="$(mktemp /tmp/frpc-advanced.pre-v2.XXXXXX)" || exit 1
+trap 'rm -f "$backup_tmp" "$VERIFY_LOG"' EXIT HUP INT TERM
+cp -p "/etc/config/$NAME" "$backup_tmp" || exit 1
+chmod 0600 "$backup_tmp" || exit 1
+
+_migration_list_count() {
+	MIGRATION_LIST_COUNT=$((MIGRATION_LIST_COUNT + 1))
+}
+
+_migration_scope_add() {
+	case "$1" in
+		HeartBeats|NewWorkConns)
+			MIGRATION_SCOPE_ITEMS="${MIGRATION_SCOPE_ITEMS}${MIGRATION_SCOPE_ITEMS:+ }$1" ;;
+	esac
+}
+
+collect_scopes() {
+	local section="$1" raw scope old_ifs
+	MIGRATION_SCOPE_ITEMS=""
+	config_list_foreach "$section" auth__additionalScopes _migration_scope_add
+	[ -n "$MIGRATION_SCOPE_ITEMS" ] && return 0
+
+	raw="$(uci -q get "$NAME.$section.auth__additionalScopes")"
+	[ -n "$raw" ] || return 0
+	old_ifs="$IFS"
+	IFS=','
+	for scope in $raw; do
+		scope="$(printf '%s' "$scope" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+		_migration_scope_add "$scope"
+	done
+	IFS="$old_ifs"
+}
+
+convert_option_to_list() {
+	local section="$1" option="$2" raw item old_ifs
+
+	MIGRATION_LIST_COUNT=0
+	config_list_foreach "$section" "$option" _migration_list_count
+	[ "$MIGRATION_LIST_COUNT" -gt 0 ] && return 0
+
+	raw="$(uci -q get "$NAME.$section.$option")"
+	[ -n "$raw" ] || return 0
+
+	uci -q delete "$NAME.$section.$option"
+	old_ifs="$IFS"
+	IFS=','
+	for item in $raw; do
+		item="$(printf '%s' "$item" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+		[ -n "$item" ] && uci add_list "$NAME.$section.$option=$item"
+	done
+	IFS="$old_ifs"
+	changed=1
+}
+
+config_load "$NAME"
+
+changed=0
+old_keepalive="$(uci -q get "$NAME.main.transport__dialServerKeepAlive")"
+new_keepalive="$(uci -q get "$NAME.main.transport__dialServerKeepalive")"
+if [ -n "$old_keepalive" ]; then
+	[ -n "$new_keepalive" ] || {
+		uci set "$NAME.main.transport__dialServerKeepalive=$old_keepalive"
+		changed=1
+	}
+	uci -q delete "$NAME.main.transport__dialServerKeepAlive"
+	changed=1
+fi
+
+if uci -q get "$NAME.main.includes" >/dev/null; then
+	convert_option_to_list main includes
+fi
+
+for rule_section in $(uci -q show "$NAME" | sed -n "s/^$NAME\.\([^=]*\)=rule$/\1/p"); do
+	for option in allowUsers customDomains locations; do
+		if uci -q get "$NAME.$rule_section.$option" >/dev/null; then
+			convert_option_to_list "$rule_section" "$option"
+		fi
+	done
+done
+
+server="$(uci -q get "$NAME.main.server")"
+if [ -n "$server" ] && [ "$server" != 'nil' ] && [ "$(uci -q get "$NAME.$server")" = 'server' ]; then
+	for option in auth__method auth__token transport__tcpMux transport__tcpMuxKeepaliveInterval; do
+		main_value="$(uci -q get "$NAME.main.$option")"
+		server_value="$(uci -q get "$NAME.$server.$option")"
+		if [ -n "$main_value" ] && [ -z "$server_value" ]; then
+			uci set "$NAME.$server.$option=$main_value"
+			changed=1
+		fi
+		if uci -q get "$NAME.main.$option" >/dev/null; then
+			uci -q delete "$NAME.main.$option"
+			changed=1
+		fi
+	done
+
+	collect_scopes "$server"
+	scopes="$MIGRATION_SCOPE_ITEMS"
+	if [ -z "$scopes" ]; then
+		collect_scopes main
+		scopes="$MIGRATION_SCOPE_ITEMS"
+	fi
+	if [ -n "$scopes" ]; then
+		uci -q delete "$NAME.$server.auth__additionalScopes"
+		for scope in $scopes; do
+			uci add_list "$NAME.$server.auth__additionalScopes=$scope"
+		done
+		changed=1
+	fi
+	if uci -q get "$NAME.main.auth__additionalScopes" >/dev/null; then
+		uci -q delete "$NAME.main.auth__additionalScopes"
+		changed=1
+	fi
+fi
+
+uci set "$NAME.main.schema_version=$SCHEMA_VERSION"
+changed=1
+
+if [ "$changed" = 1 ]; then
+	uci commit "$NAME" || exit 1
+	if /etc/init.d/frpc-advanced preview_config >/dev/null 2>"$VERIFY_LOG"; then
+		rm -f "$backup_tmp" "$VERIFY_LOG"
+		trap - EXIT HUP INT TERM
+	else
+		cp "$backup_tmp" "/etc/config/$NAME" || exit 1
+		chmod 0600 "/etc/config/$NAME"
+		uci commit "$NAME" >/dev/null 2>&1 || true
+		logger -p daemon.err -t "$NAME" 'Configuration migration failed validation and was rolled back'
+		exit 1
+	fi
+fi
+
+rm -f /etc/.frpc-advanced-migrated
+rm -f /tmp/luci-indexcache.*
+rm -rf /tmp/luci-modulecache/
+exit 0

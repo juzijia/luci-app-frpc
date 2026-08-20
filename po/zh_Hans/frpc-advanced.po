@@ -1,0 +1,1800 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1506
+msgid "Access & Protocol"
+msgstr "访问与协议"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1829
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1840
+msgid "Add FRPS Server"
+msgstr "添加 FRPS 服务端"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2080
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2086
+msgid "Add Rule"
+msgstr "添加规则"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1056
+msgid "Added"
+msgstr "新增"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1895
+msgid "Additional auth scopes"
+msgstr "附加认证范围"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1788
+msgid "Additional proxy configurations"
+msgstr "附加代理配置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1852
+msgid "Address"
+msgstr "地址"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1860
+msgid "Address or domain name. IPv6 is supported."
+msgstr "地址或域名，支持 IPv6。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1803
+msgid "Admin assets directory"
+msgstr "管理页面资源目录"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1804
+msgid "Admin panel TLS certificate"
+msgstr "管理面板 TLS 证书"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1806
+msgid "Admin panel TLS private key"
+msgstr "管理面板 TLS 私钥"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1801
+msgid "Admin password"
+msgstr "管理密码"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1798
+msgid "Admin port"
+msgstr "管理端口"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1800
+msgid "Admin user"
+msgstr "管理用户"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1615
+msgid "Advanced"
+msgstr "高级"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1831
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2082
+msgid "Advanced Settings"
+msgstr "高级设置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1792
+msgid ""
+"Advanced raw TOML lines appended to the common configuration. Invalid syntax "
+"prevents startup."
+msgstr "追加到通用配置末尾的高级 TOML 原始行；语法错误会阻止服务启动。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2452
+msgid "Advanced raw TOML lines appended to this proxy or visitor."
+msgstr "追加到当前代理或访客配置末尾的高级 TOML 原始行。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2297
+msgid "Allowed users"
+msgstr "允许的用户"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1308
+msgid "Authentication"
+msgstr "身份认证"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1871
+msgid "Authentication Method"
+msgstr "认证方式"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1876
+msgid "Authentication token"
+msgstr "认证 token"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1183
+msgid ""
+"Back up the current saved configuration or restore it from a backup file."
+msgstr "备份当前已保存的配置，或从备份文件恢复。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1060
+msgid "Backend validation failed"
+msgstr "后端验证失败"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1116
+msgid "Backup exported successfully."
+msgstr "备份已成功导出。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1190
+msgid "Backup source"
+msgstr "备份来源"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1061
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1077
+msgid "Backup validation failed:"
+msgstr "备份验证失败："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1055
+msgid "Backup validation passed."
+msgstr "备份验证通过。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2351
+msgid "Bandwidth limit"
+msgstr "带宽限流"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2354
+msgid "Bandwidth limit mode"
+msgstr "带宽限流模式"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1610
+msgid "Basic"
+msgstr "基础"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1830
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2081
+msgid "Basic Settings"
+msgstr "基础设置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1809
+msgid "Built-in Store file"
+msgstr "内置 Store 文件"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1123
+msgid "Cancel"
+msgstr "取消"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:196
+msgid "Candidate configuration is empty."
+msgstr "候选配置为空。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:196
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:198
+msgid "Candidate generation failed."
+msgstr "候选配置生成失败。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1056
+msgid "Changed"
+msgstr "已更改"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2559
+msgid "Check version after saving the new path"
+msgstr "保存新路径后检查版本"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:189
+msgid "Clear Log"
+msgstr "清空日志"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1713
+msgid "Client ID"
+msgstr "客户端 ID"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2357
+msgid "Client Side"
+msgstr "客户端"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1182
+msgid "Configuration Backup & Restore"
+msgstr "配置备份与恢复"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1813
+msgid "Configuration Backup && Restore"
+msgstr "配置备份与恢复"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:257
+msgid "Configuration path:"
+msgstr "配置路径："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:997
+msgid "Configuration restored successfully, FRPC has been reloaded."
+msgstr "配置恢复成功，FRPC 已重新加载。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:999
+msgid "Configuration restored successfully, FRPC is currently not running."
+msgstr "配置恢复成功，FRPC 当前未运行。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1001
+msgid "Configuration restored successfully, FRPC running state is unknown."
+msgstr "配置恢复成功，FRPC 运行状态未知。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1003
+msgid "Configuration restored successfully, but FRPC reload failed."
+msgstr "配置已恢复，但 FRPC 重新加载失败。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1127
+msgid "Confirm Export"
+msgstr "确认导出"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1747
+msgid "Connect server local IP"
+msgstr "连接服务端本地 IP"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1754
+msgid "Connect to FRPS through an HTTP, SOCKS5, SOCKS5H, or NTLM proxy."
+msgstr "通过 HTTP、SOCKS5、SOCKS5H 或 NTLM 代理连接 FRPS。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1314
+msgid "Connection Optimization"
+msgstr "连接优化"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1734
+msgid "Connection pool count"
+msgstr "连接池数量"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2133
+msgid ""
+"Connects to an STCP, XTCP, or SUDP private proxy published by another FRPC "
+"client."
+msgstr "用于连接其他 FRPC 发布的 STCP、XTCP 或 SUDP 私有代理。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:69
+msgid ""
+"Controls where the proxy bandwidth limit is enforced. Client applies the "
+"limit in FRPC; Server applies it in FRPS. Default leaves the setting unset, "
+"and FRP Core uses client-side enforcement."
+msgstr ""
+"控制代理带宽限制的执行位置。客户端表示由 FRPC 限制，服务端表示由 FRPS 限制；"
+"默认留空，由 FRP Core 使用客户端限制。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1640
+msgid "Current FRPS server"
+msgstr "当前 FRPS 服务端"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:903
+msgid "Current FRPS server selection is missing or stale."
+msgstr "当前选择的 FRPS 服务端不存在或已失效。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:121
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:201
+msgid "Current Runtime Configuration"
+msgstr "当前运行配置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1191
+msgid "Current saved FRP configuration"
+msgstr "当前已保存的 FRP 配置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2572
+msgid "Current version"
+msgstr "当前版本"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2245
+msgid "Custom domains"
+msgstr "自定义域名"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1781
+msgid "DNS server"
+msgstr "DNS 服务器"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2356
+msgid "Default"
+msgstr "默认"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:61
+msgid ""
+"Default is 127.0.0.1 for local access only. Set it to 0.0.0.0 to allow LAN "
+"access. WAN access is controlled by the OpenWrt / ImmortalWrt firewall "
+"rules. Configure a management panel username and password to prevent "
+"unauthorized access."
+msgstr ""
+"默认 127.0.0.1，仅本机访问。设置为 0.0.0.0 可以局域网访问，WAN 口访问由 "
+"OpenWrt / ImmortalWrt 防火墙规则决定。建议配置面板账号和密码，避免未授权访"
+"问。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1795
+msgid ""
+"Default is 127.0.0.1. Set to 0.0.0.0 to listen on all network interfaces."
+msgstr "默认 127.0.0.1，监听所有网络请设置为 0.0.0.0。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1635
+msgid "Default: root"
+msgstr "默认：root"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2529
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2564
+msgid "Detecting version…"
+msgstr "正在检测版本…"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1742
+msgid "Dial server keepalive"
+msgstr "连接保活"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1738
+msgid "Dial server timeout"
+msgstr "连接服务端超时"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2325
+msgid "Disable assisted NAT addresses"
+msgstr "禁用辅助 NAT 地址"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1945
+msgid "Disable custom TLS first byte"
+msgstr "禁用 TLS 自定义首字节"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2385
+msgid "Disabled"
+msgstr "已禁用"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1604
+msgid "Display mode"
+msgstr "显示模式"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:218
+msgid ""
+"Displays recent FRPC system logs, up to 100 lines or 12 KiB, refreshing "
+"every 5 seconds. Clear Log only clears this display."
+msgstr ""
+"显示最近的 FRPC 系统日志，最多 100 行或 12 KiB，每 5 秒刷新一次。“清除日志”仅"
+"清空当前显示。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1562
+msgid "Documentation"
+msgstr "文档"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2214
+msgid "Domains:"
+msgstr "域名："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:939
+msgid "Each server must contain a boolean selected field."
+msgstr "每个 server 必须包含布尔类型的 selected 字段。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2087
+msgid "Edit Rule"
+msgstr "编辑规则"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1629
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1845
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2090
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2110
+msgid "Enable"
+msgstr "启用"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1942
+msgid "Enable TLS"
+msgstr "启用 TLS"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1808
+msgid "Enable pprof"
+msgstr "启用 pprof"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:838
+msgid "Enter a subdomain or at least one custom domain."
+msgstr "请输入子域名或至少一个自定义域名。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:946
+msgid "Exactly one server must be selected."
+msgstr "必须且只能选择一个 server。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2351
+msgid "Example: 3MB or 500KB."
+msgstr "例如：3MB 或 500KB。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1630
+msgid "Executable file path"
+msgstr "可执行文件路径"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1715
+msgid "Exit on login failure"
+msgstr "登录失败退出"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1120
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1187
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1194
+msgid "Export Configuration"
+msgstr "导出配置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1130
+msgid "Export failed:"
+msgstr "导出失败："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1814
+msgid ""
+"Export or restore FRP configuration. Local executable and service settings "
+"are preserved. Only accepts JSON backups exported by this plugin."
+msgstr ""
+"导出或恢复 FRP 配置。本地可执行文件和服务设置将保持不变。仅接受由本插件导出"
+"的 JSON 备份。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1188
+msgid "Export the current saved FRPC configuration as a JSON backup file."
+msgstr "将当前已保存的 FRPC 配置导出为 JSON 备份文件。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:64
+msgid ""
+"Extends authentication to HeartBeats and/or NewWorkConns. FRPS must enable "
+"matching additional scopes so heartbeat and new work connection requests "
+"remain authenticated."
+msgstr ""
+"将认证扩展到 HeartBeats 和/或 NewWorkConns。FRPS 必须启用相同范围，确保心跳和"
+"新工作连接保持认证。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1627
+msgid "Extension Features"
+msgstr "扩展功能"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1791
+msgid "Extra TOML options"
+msgstr "额外 TOML 选项"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1729
+msgid "FRP Wire Protocol"
+msgstr "FRP 内部协议版本"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2355
+msgid "FRP default: Client side."
+msgstr "FRP 默认：客户端。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2321
+msgid "FRP default: Disabled. Enable only for long-lived XTCP connections."
+msgstr "FRP 默认：禁用。仅用于长连接 XTCP 时启用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1808
+msgid "FRP default: Disabled. Enable only for troubleshooting."
+msgstr "FRP 默认：禁用。仅在排错时启用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2365
+msgid "FRP default: Disabled. Enable only when bandwidth is very limited."
+msgstr "FRP 默认：禁用。仅在带宽非常有限时启用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2362
+msgid "FRP default: Disabled. Enable only when you need per-proxy encryption."
+msgstr "FRP 默认：禁用。仅在需要按代理加密时启用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1946
+msgid ""
+"FRP default: Enabled. Disable only for compatibility with older proxies."
+msgstr "FRP 默认：启用。仅为兼容旧版代理时禁用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1971
+msgid "FRP default: Enabled. Disable only for low-resource environments."
+msgstr "FRP 默认：启用。仅在资源受限环境中禁用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2446
+msgid ""
+"FRP default: Enabled. Disable only when the backend does not support HTTP/2."
+msgstr "FRP 默认：启用。仅在后端不支持 HTTP/2 时禁用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1716
+msgid "FRP default: Enabled. Disable only when you need to keep retrying."
+msgstr "FRP 默认：启用。仅在需要持续重试时禁用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1943
+msgid ""
+"FRP default: Enabled. Disable only when your server does not support TLS."
+msgstr "FRP 默认：启用。仅在服务端不支持 TLS 时禁用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1560
+msgid ""
+"FRP is a high-performance reverse proxy application for exposing private "
+"services."
+msgstr "FRP 是一款用于公开内网服务的高性能反向代理应用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2298
+msgid ""
+"FRPC users allowed to access this private proxy. Leave empty to allow only "
+"the same user; enter `*` to allow all users."
+msgstr ""
+"允许访问此私有代理的 FRPC 用户。留空时仅允许同一用户；填写 `*` 可允许所有用"
+"户。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1842
+msgid "FRPS Server"
+msgstr "FRPS 服务端"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1825
+msgid "FRPS Server Configurations"
+msgstr "FRPS 服务端配置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1085
+msgid "Failed to read backup file."
+msgstr "读取备份文件失败。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2313
+msgid "Fallback timeout (ms)"
+msgstr "回退超时（毫秒）"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2312
+msgid "Fallback visitor"
+msgstr "回退访客"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1025
+msgid "File is empty or too small."
+msgstr "文件为空或太小。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:266
+msgid "File path:"
+msgstr "文件路径："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1027
+msgid "File too large, max 256 KiB."
+msgstr "文件过大，最大 256 KiB。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2326
+msgid ""
+"For XTCP, use only STUN-discovered public addresses instead of local network "
+"interfaces. FRP default: Disabled."
+msgstr ""
+"对于 XTCP，仅使用 STUN 发现的公网地址，不使用本地网络接口。FRP 默认：禁用。"
+
+#: root/usr/share/luci/menu.d/luci-app-frpc-advanced.json:3
+msgid "Frp Client"
+msgstr "Frp 客户端"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:213
+msgid "Frp client not enabled"
+msgstr "Frp 客户端未启用"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:216
+msgid "Frp client running"
+msgstr "Frp 客户端运行中"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:219
+msgid "Frp client start failed"
+msgstr "Frp 客户端启动失败"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:222
+msgid "Frp client stopped"
+msgstr "Frp 客户端已停止"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2578
+msgid "Frp executable not found; install or upload it and retry"
+msgstr "未找到 FRPC 可执行文件；请安装或上传后重试"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:192
+msgid ""
+"Generated from the saved UCI configuration. Candidate config; verified on "
+"Save & Apply."
+msgstr "根据已保存的 UCI 配置生成，保存并应用时验证。"
+
+#: root/usr/share/rpcd/acl.d/luci-app-frpc-advanced.json:3
+msgid "Grant access to LuCI app FRPC Advanced"
+msgstr "授予 LuCI 应用 FRPC Advanced 访问权限"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2387
+msgid "HTTP"
+msgstr "HTTP"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2341
+msgid "HTTP password"
+msgstr "HTTP 密码"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2337
+msgid "HTTP user"
+msgstr "HTTP 用户"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2390
+msgid "Health check HTTP path"
+msgstr "健康检查 HTTP 路径"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2407
+msgid "Health check interval"
+msgstr "健康检查间隔"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2406
+msgid "Health check max failures"
+msgstr "健康检查最大失败次数"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2405
+msgid "Health check timeout"
+msgstr "健康检查超时"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2384
+msgid "Health check type"
+msgstr "健康检查类型"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1773
+msgid "Heartbeat interval"
+msgstr "心跳间隔"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1777
+msgid "Heartbeat timeout"
+msgstr "心跳超时"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2334
+msgid "Host header rewrite"
+msgstr "主机头重写"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1199
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1207
+msgid "Import & Restore"
+msgstr "导入并恢复"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1172
+msgid "Import failed:"
+msgstr "导入失败："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:966
+msgid ""
+"Import will overwrite the current saved configuration. Local executable and "
+"service settings are preserved."
+msgstr "导入会覆盖当前已保存的配置；本地可执行文件和服务设置会保留。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:248
+msgid ""
+"Important: TOML may contain tokens, passwords, and certificate paths. Do not "
+"screenshot or share it publicly."
+msgstr "重要提示：TOML 可能包含 token、密码和证书路径，请勿截图或公开分享。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1118
+msgid ""
+"Important: The backup file contains tokens, passwords, and other sensitive "
+"information. Keep it secure."
+msgstr "重要提示：备份文件包含 token、密码等敏感信息，请妥善保管。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1140
+msgid "Importing..."
+msgstr "正在导入……"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1938
+msgid "Insecure. Use only for debugging. FRP default: Disabled."
+msgstr "不安全。仅用于调试。FRP 默认：禁用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1730
+msgid ""
+"Internal FRP message protocol between FRPC and FRPS. Leave empty to use the "
+"FRP default: v1."
+msgstr "FRPC 与 FRPS 之间的内部 FRP 消息协议。留空时使用 FRP 默认值 v1。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:932
+msgid "Internal setting is not allowed in backup:"
+msgstr "备份中不允许包含内部设置："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:919
+msgid "Invalid backup format."
+msgstr "备份格式无效。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2320
+msgid "Keep tunnel open"
+msgstr "保持隧道打开"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:201
+msgid "Last Generated Runtime Configuration"
+msgstr "最近生成的运行配置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2239
+msgid ""
+"Leave empty to let FRPS assign a random remote port. Setting 0 has the same "
+"effect."
+msgstr "留空时由 FRPS 分配随机远端端口；设置为 0 效果相同。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2257
+msgid "Leave empty to use the current Frpc user."
+msgstr "留空时使用当前 FRPC 用户。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1508
+msgid "Load Balancing & Health Check"
+msgstr "负载均衡与健康检查"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2376
+msgid "Load balancer group"
+msgstr "负载均衡组"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2379
+msgid "Load balancer group key"
+msgstr "负载均衡分组密钥"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2179
+msgid "Local / Bind"
+msgstr "本地/绑定"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2224
+msgid "Local address"
+msgstr "本地地址"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2229
+msgid "Local port"
+msgstr "本地端口"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2233
+msgid "Local port is required."
+msgstr "本地端口不能为空。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2331
+msgid "Locations"
+msgstr "路径列表"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:174
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:192
+msgid "Log display cleared. New FRPC log entries will appear automatically."
+msgstr "日志显示已清除，新的 FRPC 日志将自动出现。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1718
+msgid "Log level"
+msgstr "日志级别"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1626
+msgid "Management Panel"
+msgstr "管理面板"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1795
+msgid "Management panel address"
+msgstr "管理面板地址"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2310
+msgid "Max retries per hour"
+msgstr "每小时最大重试"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2311
+msgid "Minimum retry interval"
+msgstr "最小重试间隔"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2120
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2168
+msgid "Name"
+msgstr "名称"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:176
+msgid "No FRPC log entries yet."
+msgstr "暂无 FRPC 日志。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:194
+msgid "No FRPS server has been added. Please add a server first."
+msgstr "尚未添加 FRPS 服务端，请先添加服务端。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1023
+msgid "No backup file selected."
+msgstr "未选择备份文件。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:171
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:172
+msgid "No data."
+msgstr "暂无数据。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1135
+msgid "No validated backup data available."
+msgstr "没有可用的已验证备份数据。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2369
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2418
+msgid "None"
+msgstr "无"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1873
+msgid "OIDC"
+msgstr "OIDC"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1361
+msgid "OIDC Advanced Settings"
+msgstr "OIDC 高级设置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1905
+msgid "OIDC audience"
+msgstr "OIDC 受众"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:65
+msgid ""
+"OIDC audience requested for the access token. Configure it only when the "
+"identity provider or FRPS requires a specific audience."
+msgstr ""
+"请求访问 token 时使用的 OIDC 受众。仅在身份提供方或 FRPS 要求特定受众时配置。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1903
+msgid "OIDC client ID"
+msgstr "OIDC 客户端 ID"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1904
+msgid "OIDC client secret"
+msgstr "OIDC 客户端密钥"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:66
+msgid ""
+"OIDC endpoint from which FRPC obtains an access token. Use the Token "
+"Endpoint provided by your identity provider."
+msgstr ""
+"FRPC 获取访问 token 的 OIDC 端点。请使用身份提供方提供的 Token Endpoint。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1937
+msgid "OIDC insecure skip verify"
+msgstr "OIDC 跳过证书验证"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1930
+msgid "OIDC proxy URL"
+msgstr "OIDC 代理 URL"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1928
+msgid "OIDC scope"
+msgstr "OIDC 权限范围"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:67
+msgid ""
+"OIDC scopes requested when obtaining the access token. They must be allowed "
+"by the identity provider."
+msgstr "获取访问 token 时请求的 OIDC scope，必须被身份提供方允许。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1906
+msgid "OIDC token endpoint URL"
+msgstr "OIDC token 端点 URL"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1929
+msgid "OIDC trusted CA file"
+msgstr "OIDC 可信 CA 文件"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1713
+msgid "Optional stable identifier for this frpc instance."
+msgstr "此 FRPC 实例的可选稳定标识。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1896
+msgid "Optional. Additional authentication scopes are disabled by default."
+msgstr "可选。默认不启用附加认证范围。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1055
+msgid "Options"
+msgstr "配置项"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2367
+msgid "PROXY Protocol Version"
+msgstr "PROXY Protocol 版本"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2368
+msgid ""
+"Passes original connection information to the local backend, which must "
+"support PROXY Protocol. Disabled by default and unrelated to the internal "
+"FRP protocol between FRPC and FRPS."
+msgstr ""
+"向本地后端传递原始连接信息；后端必须支持 PROXY Protocol。默认关闭，与 FRPC "
+"和 FRPS 之间的 FRP 内部协议版本无关。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1630
+msgid "Path to the frpc binary."
+msgstr "FRPC 二进制文件路径。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1810
+msgid "Persists proxies and visitors managed through the FRPC web API."
+msgstr "保存通过 FRPC Web API 管理的代理和访客。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1657
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1692
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1705
+msgid "Please add an FRPS server first"
+msgstr "请先添加 FRPS 服务端"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1024
+msgid "Please select a .json backup file."
+msgstr "请选择 .json 备份文件。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1648
+msgid "Please select an FRPS server"
+msgstr "请选择 FRPS 服务端"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2432
+msgid "Plugin HTTP password"
+msgstr "插件 HTTP 密码"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2431
+msgid "Plugin HTTP user"
+msgstr "插件 HTTP 用户"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2426
+msgid "Plugin Unix socket path"
+msgstr "插件 Unix 套接字路径"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2434
+msgid "Plugin certificate path"
+msgstr "插件证书路径"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2445
+msgid "Plugin enable HTTP/2"
+msgstr "插件启用 HTTP/2"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2455
+msgid "Plugin extra options"
+msgstr "插件额外选项"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2436
+msgid "Plugin host header rewrite"
+msgstr "插件主机头重写"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2435
+msgid "Plugin key path"
+msgstr "插件密钥路径"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2433
+msgid "Plugin local address"
+msgstr "插件本地地址"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2429
+msgid "Plugin local path"
+msgstr "插件本地路径"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2428
+msgid "Plugin password"
+msgstr "插件密码"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2430
+msgid "Plugin strip prefix"
+msgstr "插件去除前缀"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2417
+msgid "Plugin type"
+msgstr "插件类型"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2427
+msgid "Plugin username"
+msgstr "插件用户名"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1509
+msgid "Plugins & Extensions"
+msgstr "插件与扩展"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2204
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2205
+msgid "Port:"
+msgstr "端口："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1714
+msgid "Prefix applied to proxy names."
+msgstr "应用到代理名称的前缀。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2220
+msgid "Private proxy"
+msgstr "私有代理"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1753
+msgid "Proxy address"
+msgstr "代理地址"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2076
+msgid "Proxy and Visitor Rules"
+msgstr "代理与访客规则"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1758
+msgid "QUIC keepalive period"
+msgstr "QUIC 保活周期"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1763
+msgid "QUIC max idle timeout"
+msgstr "QUIC 最大空闲超时"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1768
+msgid "QUIC max incoming streams"
+msgstr "QUIC 最大传入流"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2204
+msgid "Random"
+msgstr "随机"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:74
+msgid ""
+"Raw TOML options appended to the selected plugin configuration. Invalid "
+"syntax or duplicate keys may make the generated FRPC configuration invalid."
+msgstr ""
+"追加到所选插件配置的原始 TOML 选项；语法错误或重复键可能导致生成的 FRPC 配置"
+"无效。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1881
+msgid "Read token from file"
+msgstr "从文件读取 token"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1033
+msgid "Reading and validating backup file..."
+msgstr "正在读取并验证备份文件……"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:63
+msgid ""
+"Reads the authentication token from a plain text file instead of storing it "
+"inline. Do not configure both an inline token and a token file."
+msgstr ""
+"从纯文本文件读取认证 token，不在配置中直接保存。请勿同时配置直接 token 和 "
+"token 文件。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-log.js:200
+msgid "Refresh"
+msgstr "刷新"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2189
+msgid "Remote Configuration"
+msgstr "远端配置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2238
+msgid "Remote port"
+msgstr "远程端口"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1056
+msgid "Removed"
+msgstr "已移除"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1638
+msgid "Respawn when crashed"
+msgstr "异常退出后自动重启"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:70
+msgid ""
+"Rewrites the HTTP Host header before forwarding the request to the local "
+"backend. Use it when the backend expects a specific virtual-host domain."
+msgstr ""
+"转发到本地后端前重写 HTTP Host 请求头；后端要求特定虚拟主机域名时使用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2346
+msgid "Route by HTTP user"
+msgstr "按 HTTP 用户路由"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:949
+msgid "Rule entry must be an object."
+msgstr "rules 中的条目必须是对象。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2451
+msgid "Rule extra options"
+msgstr "规则额外选项"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:782
+msgid "Rule name is required."
+msgstr "必须填写规则名称。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:791
+msgid "Rule names must be unique."
+msgstr "规则名称必须唯一。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1624
+msgid "Run & Log"
+msgstr "运行与日志"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:60
+msgid ""
+"Run FRPC as another system user to reduce privileges. Ensure that user can "
+"read the configuration, certificates, keys, and other required files."
+msgstr ""
+"以其他系统用户运行 FRPC 可降低权限。请确保该用户有权读取配置、证书、密钥及其"
+"他所需文件。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1635
+msgid "Run daemon as user"
+msgstr "以用户身份运行"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:218
+msgid "Running"
+msgstr "运行中"
+
+#: root/usr/share/luci/menu.d/luci-app-frpc-advanced.json:34
+msgid "Running Log"
+msgstr "运行日志"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:212
+msgid "Runtime configuration file is empty"
+msgstr "运行配置文件为空"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:211
+msgid "Runtime configuration file is too large"
+msgstr "运行配置文件过大"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:210
+msgid "Runtime configuration file not found"
+msgstr "未找到运行配置文件"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:206
+msgid "Runtime configuration is available."
+msgstr "运行配置可用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:215
+msgid "Runtime configuration is unavailable."
+msgstr "运行配置不可用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1783
+msgid "STUN server"
+msgstr "STUN 服务器"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:255
+msgid "Saved Configuration Preview"
+msgstr "已保存配置预览"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1774
+msgid "Seconds. A negative value disables application-layer heartbeats."
+msgstr "单位为秒；负数会禁用应用层心跳。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2280
+msgid "Secret key"
+msgstr "密钥"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1203
+msgid "Select Backup File"
+msgstr "选择备份文件"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1200
+msgid ""
+"Select a backup file. The router will validate it before restoring the "
+"configuration."
+msgstr "请选择备份文件，路由器将在恢复配置前验证其有效性。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1640
+msgid ""
+"Select the FRPS server configuration currently used by this FRPC Client."
+msgstr "选择此 FRPC 客户端当前连接的 FRPS 服务端配置。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1848
+msgid "Server Name"
+msgstr "服务端名称"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2358
+msgid "Server Side"
+msgstr "服务端"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1860
+msgid "Server address"
+msgstr "服务器地址"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:938
+msgid "Server entry must be an object."
+msgstr "servers 中的条目必须是对象。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2256
+msgid "Server name"
+msgstr "服务器名称"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1866
+msgid "Server port"
+msgstr "服务器端口"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2257
+msgid "Server user"
+msgstr "服务端用户"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:218
+msgid "Service status"
+msgstr "服务状态"
+
+#: root/usr/share/luci/menu.d/luci-app-frpc-advanced.json:12
+msgid "Settings"
+msgstr "设置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:73
+msgid ""
+"Shared authentication key for private STCP, XTCP, or SUDP proxies. The "
+"visitor and remote proxy must use the same key."
+msgstr ""
+"STCP、XTCP 或 SUDP 私有代理的共享认证密钥；访客与远端代理必须使用相同密钥。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1599
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1618
+msgid "Show all settings"
+msgstr "显示全部设置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1599
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1618
+msgid "Show common settings only"
+msgstr "仅显示常用设置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:156
+msgid "Show differences only"
+msgstr "仅显示差异"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:156
+msgid "Show full configuration"
+msgstr "显示完整配置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:218
+msgid "Stopped"
+msgstr "已停止"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2249
+msgid "Subdomain"
+msgstr "子域名"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2217
+msgid "Subdomain:"
+msgstr "子域名："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2386
+msgid "TCP"
+msgstr "TCP"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1970
+msgid "TCP multiplexing"
+msgstr "TCP 多路复用"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1973
+msgid "TCP mux keepalive interval"
+msgstr "TCPMux 保活间隔"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1323
+msgid "TLS"
+msgstr "TLS"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1960
+msgid "TLS CA certificate path"
+msgstr "TLS CA 证书路径"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:68
+msgid ""
+"TLS client authentication group: certFile and keyFile form the client "
+"certificate pair for mTLS; trustedCaFile verifies the FRPS certificate; "
+"serverName overrides the certificate name used for verification."
+msgstr ""
+"TLS 客户端认证：certFile 与 keyFile 组成 mTLS 客户端证书；trustedCaFile 用于"
+"验证 FRPS 证书；serverName 覆盖证书校验使用的名称。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1950
+msgid "TLS client certificate path"
+msgstr "TLS 客户端证书路径"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1955
+msgid "TLS client key file path"
+msgstr "TLS 客户端密钥路径"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1965
+msgid "TLS server name"
+msgstr "TLS 服务端名称"
+
+#: root/usr/share/luci/menu.d/luci-app-frpc-advanced.json:23
+msgid "TOML Comparison"
+msgstr "TOML 对比"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1789
+msgid ""
+"TOML files or glob patterns. Included files may define only proxies and "
+"visitors."
+msgstr "TOML 文件或通配模式。包含的文件只能定义代理和访客。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2200
+msgid "Target:"
+msgstr "目标："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:824
+msgid "The selected plugin is incompatible with this proxy type."
+msgstr "所选插件与当前代理类型不兼容。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1119
+msgid "This backup will contain %s configuration options."
+msgstr "本次将导出 %s 个配置项。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:849
+msgid "This field is required by the selected plugin."
+msgstr "所选插件要求填写此字段。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2398
+msgid "This field is required for HTTP health checks."
+msgstr "HTTP 健康检查需要填写此字段。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2291
+msgid "This field is required for private proxies."
+msgstr "私有代理需要填写此字段。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2272
+msgid "This field is required in visitor mode."
+msgstr "访客模式下必须填写此字段。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1921
+msgid "This field is required when OIDC authentication is selected."
+msgstr "选择 OIDC 认证时必须填写此字段。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:230
+msgid ""
+"This page is read-only and will not modify the configuration or reload FRPC."
+msgstr "本页面只读，不会修改配置或重新加载 FRPC。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:62
+msgid ""
+"Token uses a shared secret between FRPC and FRPS. OIDC obtains an access "
+"token from an identity provider; use it only when the server is configured "
+"for OIDC authentication."
+msgstr ""
+"Token 使用 FRPC 与 FRPS 的共享密钥认证；OIDC 从身份提供方获取访问 token，仅"
+"在 FRPS 配置为 OIDC 认证时使用。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1625
+msgid "Transport & Limits"
+msgstr "传输与限制"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1507
+msgid "Transport & Traffic"
+msgstr "传输与流量"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1724
+msgid "Transport protocol"
+msgstr "通信协议"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2123
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2173
+msgid "Type"
+msgstr "类型"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:951
+msgid "UCI metadata is not allowed in rule backup data."
+msgstr "rules 备份数据中不允许包含 UCI 元数据。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:942
+msgid "UCI metadata is not allowed in server backup data."
+msgstr "servers 备份数据中不允许包含 UCI 元数据。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1785
+msgid "UDP packet size"
+msgstr "UDP 包大小"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:110
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:187
+msgid "Unable to load TOML comparison data."
+msgstr "无法加载 TOML 对比数据。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced-config.js:213
+msgid "Unable to read runtime configuration"
+msgstr "无法读取运行配置"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:210
+msgid "Unable to read service status"
+msgstr "无法读取服务状态"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2581
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2585
+msgid "Unable to read version; refresh and retry"
+msgstr "无法读取版本；请刷新后重试"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1068
+msgid "Unable to validate backup on router:"
+msgstr "无法在路由器上验证备份："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1725
+msgid "Underlying transport used for the FRPC to FRPS connection."
+msgstr "FRPC 与 FRPS 之间的底层连接传输方式。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1738
+msgid "Unit: seconds."
+msgstr "单位：秒。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1743
+msgid "Unit: seconds. Use a negative value to disable keepalive probes."
+msgstr "单位：秒；使用负数可禁用保活探测。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:922
+msgid "Unsupported backup field:"
+msgstr "不支持的备份字段："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:924
+msgid "Unsupported format:"
+msgstr "不支持的格式："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:925
+msgid "Unsupported schema version:"
+msgstr "不支持的架构版本："
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2364
+msgid "Use compression"
+msgstr "使用压缩"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2361
+msgid "Use encryption"
+msgstr "使用加密"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1719
+msgid ""
+"Use info for daily use; debug/trace only for short-term troubleshooting."
+msgstr "日常使用 info，debug/trace 仅用于短期排错。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1783
+msgid "Used for XTCP NAT traversal."
+msgstr "用于 XTCP NAT 穿透。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1849
+msgid "Used to distinguish multiple FRPS servers."
+msgstr "用于区分多个 FRPS 服务端。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1714
+msgid "User prefix"
+msgstr "用户前缀"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:71
+msgid ""
+"Uses an FRPC built-in plugin instead of normal local IP and port forwarding. "
+"Selecting a plugin changes which local backend fields are used."
+msgstr ""
+"使用 FRPC 内置插件替代普通的本地 IP/端口转发。选择插件后会切换对应的本地后端"
+"字段。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1044
+msgid "Validating backup on router…"
+msgstr "正在由路由器验证备份……"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2258
+msgid "Visitor bind address"
+msgstr "绑定地址"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2259
+msgid "Visitor bind port"
+msgstr "绑定端口"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2132
+msgid "Visitor mode"
+msgstr "访客模式"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:797
+msgid "Visitor mode supports only STCP, XTCP, and SUDP."
+msgstr "访客模式仅支持 STCP、XTCP 和 SUDP。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:808
+msgid "Visitor rules cannot use proxy plugins."
+msgstr "访客规则不能使用代理插件。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:72
+msgid ""
+"Visitor target proxy name. It must match the name of the remote STCP, XTCP, "
+"or SUDP proxy being accessed."
+msgstr "访客要连接的远端代理名称，必须与目标 STCP、XTCP 或 SUDP 代理名称一致。"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:2303
+msgid "XTCP protocol"
+msgstr "XTCP 协议"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:928
+msgid "rules must be an array"
+msgstr "rules 必须是数组"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:927
+msgid "servers must be an array"
+msgstr "servers 必须是数组"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:926
+msgid "settings must be an object"
+msgstr "settings 必须是对象"
+
+#: htdocs/luci-static/resources/view/frpc-advanced.js:1347
+msgid "展开 TLS 详细选项"
+msgstr ""
+
+#~ msgid "TLS Certificates & Verification"
+#~ msgstr "TLS 证书与验证"
+
+#~ msgid "Logging is disabled. Check the system log for service messages."
+#~ msgstr "日志未启用，请查看系统日志中的服务消息。"
+
+#~ msgid "Logging is currently directed to the system log."
+#~ msgstr "日志当前输出到系统日志。"
+
+#~ msgid "-- None --"
+#~ msgstr "-- 无 --"
+
+#~ msgid ""
+#~ "A subdomain or at least one custom domain is required for this proxy type."
+#~ msgstr "此代理类型必须配置子域名或至少一个自定义域名。"
+
+#~ msgid "Add new server..."
+#~ msgstr "添加服务端…"
+
+#~ msgid "Additional proxy configs"
+#~ msgstr "附加代理配置"
+
+#~ msgid "Advanced Options"
+#~ msgstr "高级选项"
+
+#~ msgid "Alias"
+#~ msgstr "别名"
+
+#~ msgid "Append stdout and stderr to the selected log file."
+#~ msgstr "将标准输出和标准错误追加到选定的日志文件。"
+
+#~ msgid "Authentication method"
+#~ msgstr "认证方式"
+
+#~ msgid "Bind address"
+#~ msgstr "绑定地址"
+
+#~ msgid "Bind port"
+#~ msgstr "绑定端口"
+
+#~ msgid "Default (client)"
+#~ msgstr "默认（客户端）"
+
+#~ msgid "Direct token"
+#~ msgstr "直接填写 token"
+
+#~ msgid "Disable log color"
+#~ msgstr "禁用日志颜色"
+
+#~ msgid "Extra options"
+#~ msgstr "额外选项"
+
+#~ msgid "File"
+#~ msgstr "文件"
+
+#~ msgid "File path: "
+#~ msgstr "文件路径："
+
+#~ msgid ""
+#~ "For XTCP, use only STUN-discovered public addresses instead of local "
+#~ "network interfaces."
+#~ msgstr "对于 XTCP，仅使用 STUN 发现的公网地址，不使用本地网络接口地址。"
+
+#~ msgid "FRPC enables TLS by default since version 0.50.0."
+#~ msgstr "FRPC 从 0.50.0 版本起默认启用 TLS。"
+
+#~ msgid ""
+#~ "FRPC is writing to the system log. Use Status → System Log to view it."
+#~ msgstr "FRPC 正在写入系统日志，请前往“状态 → 系统日志”查看。"
+
+#~ msgid "FRPS Servers"
+#~ msgstr "FRPS 服务端"
+
+#~ msgid ""
+#~ "Important: the TOML may contain tokens, passwords, and certificate paths. "
+#~ "Do not screenshot or share it publicly."
+#~ msgstr "重要提示：TOML 可能包含 token、密码和证书路径，请勿截图或公开分享。"
+
+#~ msgid "Insecure. Use only for debugging."
+#~ msgstr "不安全，仅限调试使用。"
+
+#~ msgid "Log cleared."
+#~ msgstr "日志已清空。"
+
+#~ msgid "Enable logging"
+#~ msgstr "启用日志"
+
+#~ msgid "Log file"
+#~ msgstr "日志文件"
+
+#~ msgid "Log max days"
+#~ msgstr "日志最大天数"
+
+#~ msgid "Management Options"
+#~ msgstr "管理选项"
+
+#~ msgid "Multiplexer"
+#~ msgstr "多路复用器"
+
+#~ msgid "New Rule"
+#~ msgstr "新规则"
+
+#~ msgid "New Server"
+#~ msgstr "新服务端"
+
+#~ msgid ""
+#~ "No runtime configuration has been generated yet. Save and apply a valid "
+#~ "enabled configuration first."
+#~ msgstr "尚未生成运行配置，请先保存并应用一份已启用且有效的配置。"
+
+#~ msgid "NOT RUNNING"
+#~ msgstr "未运行"
+
+#~ msgid "Official default is enabled."
+#~ msgstr "官方默认启用。"
+
+#~ msgid ""
+#~ "Official default is enabled. Disable it to keep retrying after an initial "
+#~ "login failure."
+#~ msgstr "官方默认启用；关闭后，首次登录失败时会持续重试。"
+
+#~ msgid "PID"
+#~ msgstr "进程 ID"
+
+#~ msgid "Redirect stdout/stderr"
+#~ msgstr "重定向标准输出/错误"
+
+#~ msgid "Rule name"
+#~ msgstr "规则名称"
+
+#~ msgid "RUNNING"
+#~ msgstr "运行中"
+
+#~ msgid "Select the FRPS server used by this client."
+#~ msgstr "选择此客户端使用的 FRPS 服务端。"
+
+#~ msgid "Server"
+#~ msgstr "服务端"
+
+#~ msgid "Service Status"
+#~ msgstr "服务状态"
+
+#~ msgid "Showing the last 200 lines, limited to 64 KiB."
+#~ msgstr "显示最后 200 行，最大 64 KiB。"
+
+#~ msgid "STATUS UNAVAILABLE"
+#~ msgstr "状态不可用"
+
+#~ msgid "The configured log file does not exist yet."
+#~ msgstr "配置的日志文件尚不存在。"
+
+#~ msgid "The generated configuration is too large to display safely."
+#~ msgstr "生成的配置过大，无法安全显示。"
+
+#~ msgid "The generated runtime configuration is shown below."
+#~ msgstr "下方显示当前生成的运行配置。"
+
+#~ msgid "Troubleshooting only."
+#~ msgstr "仅用于故障排查。"
+
+#~ msgid "Unable to clear the log."
+#~ msgstr "无法清空日志。"
+
+#~ msgid "Unable to read the FRPC log."
+#~ msgstr "无法读取 FRPC 日志。"
+
+#~ msgid "Unable to read the generated runtime configuration."
+#~ msgstr "无法读取生成的运行配置。"
+
+#~ msgid "Use /tmp to avoid persistent flash writes."
+#~ msgstr "使用 /tmp 可避免持续写入闪存。"
+
+#~ msgid "Use 0 to let FRPS assign a random port."
+#~ msgstr "填写 0 可由 FRPS 分配随机端口。"
+
+#~ msgid "Version"
+#~ msgstr "版本"
+
+#~ msgid "Visitor"
+#~ msgstr "访客"
+
+#~ msgid "Write FRPC logs to the configured file."
+#~ msgstr "将 FRPC 日志写入配置的文件。"
+
+#~ msgid "Runtime Configuration Not Generated"
+#~ msgstr "尚未生成运行配置"
+
+#~ msgid "FRPC Core is not installed."
+#~ msgstr "FRPC Core 未安装。"
+
+#~ msgid "FRPC Core is invalid or not executable."
+#~ msgstr "FRPC Core 无效或不可执行。"
+
+#~ msgid "FRPC Core version is unsupported."
+#~ msgstr "FRPC Core 版本不受支持。"
+
+#~ msgid "Minimum version: 0.70.1"
+#~ msgstr "最低版本：0.70.1"
+
+#~ msgid "Saved configuration failed FRPC verification."
+#~ msgstr "已保存配置未通过 FRPC 验证。"
+
+#~ msgid "Unable to generate candidate configuration."
+#~ msgstr "无法生成候选配置。"
+
+#~ msgid "Runtime configuration file is too large."
+#~ msgstr "运行配置文件过大。"
+
+#~ msgid "Runtime configuration has not been generated yet."
+#~ msgstr "运行配置尚未生成。"
+
+#~ msgid "⚠ FRPC Core is not installed."
+#~ msgstr "⚠ FRPC Core 未安装"
+
+#~ msgid "⚠ FRPC Core is invalid."
+#~ msgstr "⚠ FRPC Core 无效"
+
+#~ msgid "⚠ FRPC Core version is unsupported. Current version: "
+#~ msgstr "⚠ 当前 FRPC Core 版本不受支持。当前版本："
+
+#~ msgid ""
+#~ "✕ Saved configuration failed FRPC verification. The runtime configuration "
+#~ "has not been modified."
+#~ msgstr "✕ 已保存配置未通过 FRPC 验证，当前运行配置未被修改。"
+
+#~ msgid "✓ Saved configuration matches the runtime configuration."
+#~ msgstr "✓ 已保存配置与当前运行配置一致"
+
+#~ msgid "⚠ Saved configuration differs from the runtime configuration."
+#~ msgstr "⚠ 已保存配置与当前运行配置不一致"
+
+#~ msgid "ℹ No runtime configuration has been generated yet."
+#~ msgstr "ℹ 当前尚无运行配置"
+
+#~ msgid "⚠ Unable to compare configurations."
+#~ msgstr "⚠ 无法比较配置"
+
+#~ msgid ""
+#~ "Compare the TOML generated from the current saved UCI configuration with "
+#~ "the current or last generated runtime TOML. This page is read-only and "
+#~ "does not change configuration or restart FRPC."
+#~ msgstr ""
+#~ "对比由当前已保存 UCI 配置生成的 TOML 与当前（或最近生成的）运行中 TOML。此"
+#~ "页面为只读，不会修改配置或重启 FRPC。"
+
+#~ msgid ""
+#~ "Configuration content may contain authentication information. Do not "
+#~ "screenshot or copy to untrusted environments."
+#~ msgstr "配置内容可能包含认证信息，请勿截图或复制到不可信环境。"
+
+#~ msgid "Authentication & TLS"
+#~ msgstr "认证与 TLS"
+
+#~ msgid "Current authentication"
+#~ msgstr "当前认证"
+
+#~ msgid "Local / Target"
+#~ msgstr "本地/目标"
+
+#~ msgid "Remote / Entry"
+#~ msgstr "远程/入口"
+
+#~ msgid "Tokyo AWS"
+#~ msgstr "东京 AWS"
+
+#~ msgid "Unnamed"
+#~ msgstr "未命名"
+
+#~ msgid ""
+#~ "Used to distinguish multiple FRPS servers, for example “Tokyo AWS”, "
+#~ "“Home”, or “Hong Kong Backup”."
+#~ msgstr "用于区分多个 FRPS 服务端，例如“东京 AWS”“家里”“香港备用”。"
+
+#~ msgid ""
+#~ "Authentication and TLS parameters are managed in the FRPS server "
+#~ "configurations below."
+#~ msgstr "认证与 TLS 参数在下方 FRPS 服务端配置中管理。"
+
+#~ msgid "Client"
+#~ msgstr "客户端"
+
+#~ msgid "Core default"
+#~ msgstr "FRP Core 默认值"
+
+#~ msgid "Current server"
+#~ msgstr "当前服务端"
+
+#~ msgid "Current server security configuration"
+#~ msgstr "当前服务端安全配置摘要"
+
+#~ msgid "Enabled"
+#~ msgstr "启用"
+
+#~ msgid "Limit location, defaults to client."
+#~ msgstr "限制位置，默认为客户端。"
+
+#~ msgid ""
+#~ "Internal FRP message protocol used between FRPC and FRPS. The default is "
+#~ "v1; v2 requires FRPS support and explicit enablement."
+#~ msgstr ""
+#~ "FRPC 与 FRPS 之间使用的内部 FRP 消息协议。默认 v1；v2 需要 FRPS 支持并显式"
+#~ "启用。"
+
+#~ msgid ""
+#~ "The public port listened on by FRPS; 0 lets FRPS assign a random port."
+#~ msgstr "FRPS 对外监听端口；0 表示由 FRPS 随机分配。"
+
+#~ msgid "binary missing or not executable"
+#~ msgstr "二进制文件不存在或不可执行"
+
+#~ msgid "FRP Core version"
+#~ msgstr "FRP Core 版本"
+
+#~ msgid "invalid executable path"
+#~ msgstr "可执行文件路径无效"
+
+#~ msgid "No"
+#~ msgstr "否"
+
+#~ msgid "unable to parse version"
+#~ msgstr "无法解析版本"
+
+#~ msgid "version query failed"
+#~ msgstr "版本查询失败"
+
+#~ msgid "Yes"
+#~ msgstr "是"
+
+#~ msgid "Target: "
+#~ msgstr "目标："
+
+#~ msgid "Port: "
+#~ msgstr "端口："
+
+#~ msgid "Domains: "
+#~ msgstr "域名："
+
+#~ msgid "Subdomain: "
+#~ msgstr "子域名："
+
+#~ msgid "Backup validation failed: "
+#~ msgstr "备份验证失败："
+
+#~ msgid "Export failed: "
+#~ msgstr "导出失败："
+
+#~ msgid ""
+#~ "Export or restore all plugin settings. Only accepts JSON backups exported "
+#~ "by this plugin."
+#~ msgstr "导出或恢复本插件的全部设置，仅接受由本插件导出的 JSON 备份。"
+
+#~ msgid "Import failed: "
+#~ msgstr "导入失败："
+
+#~ msgid "Internal setting is not allowed in backup: "
+#~ msgstr "备份中不允许包含内部设置："
+
+#~ msgid "Unable to validate backup on router: "
+#~ msgstr "无法在路由器上验证备份："
+
+#~ msgid "Unsupported backup field: "
+#~ msgstr "不支持的备份字段："
+
+#~ msgid "Unsupported format: "
+#~ msgstr "不支持的格式："
+
+#~ msgid "Unsupported schema version: "
+#~ msgstr "不支持的 schema 版本："

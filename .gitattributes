@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.ipk binary
+*.lmo binary
+*.uc linguist-language=ucode
