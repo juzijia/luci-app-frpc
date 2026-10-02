@@ -9,6 +9,7 @@ START=99
 USE_PROCD=1
 
 NAME="frpc-advanced"
+DEFAULT_CLIENT_FILE="/usr/bin/frpc"
 CONFIG_FOLDER="/var/etc/$NAME"
 
 EXTRA_COMMANDS="preview_config"
@@ -110,7 +111,7 @@ append_raw_options() {
 main_section_validate() {
 	uci_validate_section "$NAME" frpc "$1" \
 		'enabled:bool:0' \
-		'client_file:string:/usr/bin/frpc' \
+		"client_file:or(\"$DEFAULT_CLIENT_FILE\"):$DEFAULT_CLIENT_FILE" \
 		'server:string' \
 		'run_user:string' \
 		'respawn:bool:1' \
@@ -250,7 +251,7 @@ load_main_context() {
 	}
 
 	config_get_bool MAIN_ENABLED "$section" enabled 0
-	config_get MAIN_CLIENT_FILE "$section" client_file /usr/bin/frpc
+	config_get MAIN_CLIENT_FILE "$section" client_file "$DEFAULT_CLIENT_FILE"
 	config_get MAIN_SERVER "$section" server
 	config_get MAIN_RUN_USER "$section" run_user
 	config_get_bool MAIN_RESPAWN "$section" respawn 1
@@ -748,7 +749,8 @@ render_config_file() {
 
 verify_config_file() {
 	local binary="$1" file="$2" output
-	output="$("$binary" verify -c "$file" 2>&1)" || {
+	[ "$binary" = "$DEFAULT_CLIENT_FILE" ] || return 1
+	output="$("$DEFAULT_CLIENT_FILE" verify -c "$file" 2>&1)" || {
 		_err "Generated configuration is invalid: ${output:-unknown error}"
 		return 1
 	}
@@ -778,9 +780,9 @@ create_config_file() (
 )
 
 resolve_frpc_core() {
-	local file="${1:-/usr/bin/frpc}"
+	local file="${1:-$DEFAULT_CLIENT_FILE}"
 
-	[ -n "$file" ] || file="/usr/bin/frpc"
+	[ "$file" = "$DEFAULT_CLIENT_FILE" ] || return 1
 	[ -f "$file" ] && [ -x "$file" ] || return 1
 
 	printf '%s' "$file"
@@ -861,11 +863,11 @@ start_instance() {
 	fi
 
 	procd_open_instance "$section"
-	procd_set_param command "$MAIN_CLIENT_FILE" -c "$config_file"
+	procd_set_param command "$DEFAULT_CLIENT_FILE" -c "$config_file"
 	procd_set_param stdout 1
 	procd_set_param stderr 1
 	[ "$MAIN_RESPAWN" = 1 ] && procd_set_param respawn 3600 5 5
-	procd_set_param file "$MAIN_CLIENT_FILE" "$config_file"
+	procd_set_param file "$DEFAULT_CLIENT_FILE" "$config_file"
 	[ -n "$MAIN_RUN_USER" ] && procd_set_param user "$MAIN_RUN_USER"
 
 	zonename="$(uci -q get system.@system[0].zonename)"
@@ -885,9 +887,20 @@ start_service() {
 }
 
 reload_service() {
-	local section="main"
+	local section="main" configured_server enabled
 
 	config_load "$NAME" || return 1
+	config_get_bool enabled "$section" enabled 0
+	config_get configured_server "$section" server
+	if [ -z "$configured_server" ] || [ "$configured_server" = "nil" ]; then
+		if [ "$enabled" = "1" ]; then
+			_err "No server selected for enabled instance: $section"
+			return 1
+		fi
+		start
+		_info "configuration saved without a selected server"
+		return 0
+	fi
 	load_main_context "$section" || {
 		_err "Failed to load FRPC main context for $section"
 		return 1

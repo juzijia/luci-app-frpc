@@ -7,6 +7,7 @@ import { cursor } from 'uci';
 let ubus = connect(null);
 
 const UCI_CONFIG = 'frpc-advanced';
+const DEFAULT_CLIENT_FILE = '/usr/bin/frpc';
 const CONFIG_FILE = '/var/etc/frpc-advanced/frpc.main.toml';
 const MAX_CONFIG_SIZE = 524288;
 
@@ -710,20 +711,18 @@ return {
 
 		get_version: {
 			call: function(request) {
-				let path = read_main_option('client_file', '/usr/bin/frpc');
-				if (type(path) != 'string' ||
-				    length(path) == 0 ||
-				    length(path) > 1024 ||
-				    !match(path, /^\/[A-Za-z0-9_.\/-]+$/)) {
-					return { status: 'error', code: 'invalid_path' };
-				}
+				let path = read_main_option('client_file', DEFAULT_CLIENT_FILE);
+				if (type(path) == 'string' && path == '')
+					path = DEFAULT_CLIENT_FILE;
+				if (type(path) != 'string' || path != DEFAULT_CLIENT_FILE)
+					return { status: 'error', code: 'unsupported_path' };
 
-				let fileStat = stat(path);
+				let fileStat = stat(DEFAULT_CLIENT_FILE);
 				if (!fileStat || (fileStat.mode & 73) == 0)
 					return { status: 'error', code: 'not_executable' };
 
 				return ubus.defer('file', 'exec', {
-					command: path,
+					command: DEFAULT_CLIENT_FILE,
 					params: [ '--version' ],
 					env: {}
 				}, function(code, response) {
@@ -742,29 +741,6 @@ return {
 					if (match(version, /^v/)) version = substr(version, 1);
 					request.reply({ status: 'ok', version: version });
 				});
-			}
-		},
-
-		get_config: {
-			call: function() {
-				try {
-					let fileStat = stat(CONFIG_FILE);
-					if (!fileStat)
-						return { ok: true, exists: false, code: 'NOT_GENERATED', content: '', path: CONFIG_FILE };
-					if (fileStat.size > MAX_CONFIG_SIZE)
-						return { ok: false, exists: true, code: 'FILE_TOO_LARGE', content: '', path: CONFIG_FILE, size: fileStat.size };
-					return {
-						ok: true,
-						exists: true,
-						code: 'OK',
-						content: readfile(CONFIG_FILE) || '',
-						path: CONFIG_FILE,
-						size: fileStat.size
-					};
-				}
-				catch (e) {
-					return { ok: true, exists: false, code: 'NOT_GENERATED', content: '', path: CONFIG_FILE };
-				}
 			}
 		},
 

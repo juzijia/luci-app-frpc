@@ -1677,10 +1677,13 @@ return view.extend({
 		s.tab('extensions', _('Extension Features'));
 
 		let o = setSwitch(s.taboption('general', form.Flag, 'enabled', _('Enable')), false);
-		o = s.taboption('general', form.Value, 'client_file', _('Executable file path'), _('Path to the frpc binary.'));
+		o = s.taboption('general', form.Value, 'client_file', _('Executable file path'), _('Only the system-installed core is supported.'));
 		o.datatype = 'file';
 		o.default = '/usr/bin/frpc';
 		o.rmempty = false;
+		o.validate = function(sectionId, value) {
+			return value === this.default || _('Only the system-installed core is supported.');
+		};
 
 		o = withFieldHelp(s.taboption('general', widgets.UserSelect, 'run_user', _('Run daemon as user'), _('Default: root')));
 		o.default = 'root';
